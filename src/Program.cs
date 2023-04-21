@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.IdentityModel.Tokens;
+using w_escolas.Endpoints.Security;
 using w_escolas.Endpoints.Usuarios;
 using w_escolas.Infra.Data.DapperQueries;
 using w_escolas.Infra.Data.DapperQueries.Matriculas;
@@ -86,6 +87,11 @@ app.UseHttpsRedirection();
 
 app.MapMethods(UsuarioPost.Template, UsuarioPost.Methods, UsuarioPost.Handle);
 app.MapMethods(UsuarioGetAll.Template, UsuarioGetAll.Methods, UsuarioGetAll.Handle);
+
+app.MapMethods(EmailConfirmationPost.Template, EmailConfirmationPost.Methods, EmailConfirmationPost.Handle);
+app.MapMethods(TokenPost.Template, TokenPost.Methods, TokenPost.Handle);
+app.MapMethods(ForgottenPasswordPost.Template, ForgottenPasswordPost.Methods, ForgottenPasswordPost.Handle);
+app.MapMethods(PasswordResetPost.Template, PasswordResetPost.Methods, PasswordResetPost.Handle);
 
 app.Run();
 
