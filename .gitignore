@@ -1,4 +1,4 @@
 **/obj
 **/bin
 **/TestResults
-src/appsettings**.*
+src/appsettings.Development.json
