@@ -15,6 +15,13 @@ public class Aluno : Pessoa
     virtual public Endereco? Endereco { get; private set; }
     virtual public IEnumerable<Matricula>? Matriculas { get; private set; }
 
+    public Aluno(Guid escolaId, string nome, string codigo)
+        : base(nome)
+    {
+        this.EscolaId = escolaId;
+        this.Codigo = codigo;
+    }
+
     public Aluno(Guid escolaId,
         string nome,
         string? codigo,
