@@ -15,7 +15,7 @@ public class Matricula : Entity
     public DateTime DataMatricula { get; private set; }
     public bool Cancelada { get; private set; }
 
-    virtual public Escolas.Escola? Escola { get; private set; }
+    virtual public Escola? Escola { get; private set; }
     virtual public Curso? Curso { get; private set; }
     virtual public Aluno? Aluno { get; private set; }
     virtual public Temporada? Temporada { get; private set; }

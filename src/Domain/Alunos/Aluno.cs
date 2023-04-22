@@ -8,7 +8,7 @@ namespace w_escolas.Domain.Alunos;
 public class Aluno : Pessoa
 {
     public Guid EscolaId { get; private set; }
-    virtual public Escolas.Escola? Escola { get; private set; }
+    virtual public Escola? Escola { get; private set; }
     public string? Codigo { get; private set; }
     public Guid? EnderecoId { get; private set; }
 

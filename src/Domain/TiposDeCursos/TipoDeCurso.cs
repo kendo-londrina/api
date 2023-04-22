@@ -11,7 +11,7 @@ public class TipoDeCurso : Entity
     public string Nome { get; private set; }
     public int Ordem { get; private set; }
 
-    virtual public Escolas.Escola? Escola { get; private set; }
+    virtual public Escola? Escola { get; private set; }
     virtual public IEnumerable<Curso>? Cursos { get; private set; }
 
     public TipoDeCurso(Guid escolaId, string codigo, string nome, int ordem)

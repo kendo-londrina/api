@@ -15,7 +15,7 @@ public class Curso : Entity
     public Guid EscolaId { get; private set; }
 
     virtual public TipoDeCurso? TipoDeCurso { get; private set; }
-    virtual public Escolas.Escola? Escola { get; private set; }
+    virtual public Escola? Escola { get; private set; }
     virtual public IEnumerable<Turma>? Turmas { get; private set; }
     virtual public IEnumerable<Matricula>? Matriculas { get; private set; }
 

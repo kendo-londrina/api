@@ -18,7 +18,7 @@ public class Temporada : Entity
     public int? Bimestre { get; private set; }
     public int? Mes { get; private set; }
 
-    virtual public Escolas.Escola? Escola { get; private set; }
+    virtual public Escola? Escola { get; private set; }
     virtual public IEnumerable<Curso>? Cursos { get; private set; }
     virtual public IEnumerable<Matricula>? Matriculas { get; private set; }
 
