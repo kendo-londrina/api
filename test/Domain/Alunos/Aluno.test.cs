@@ -1,10 +1,11 @@
 using Bogus;
 using FluentAssertions;
-using w_escolas.Domain.Alunos;
+
+namespace w_escolas.Domain.Alunos;
 
 public class AlunoTest
 {
-    [Fact(DisplayName = nameof(InstanciarObjetoSimples))]
+    [Fact()]
     public void InstanciarObjetoSimples()
     {
         var faker = new Faker("pt_BR");
@@ -23,7 +24,7 @@ public class AlunoTest
         aluno.Codigo.Should().Be(codigo);
     }
 
-    [Fact(DisplayName = nameof(InstanciarObjetoSimples))]
+    [Fact()]
     public void InstanciarObjetoCompleto()
     {
         var faker = new Faker("pt_BR");
@@ -64,7 +65,7 @@ public class AlunoTest
         aluno.Religiao.Should().Be(religiao);
     }
 
-    [Fact(DisplayName = nameof(AlterarDados))]
+    [Fact()]
     public void AlterarDados() {
         var faker = new Faker("pt_BR");
 
