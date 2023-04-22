@@ -18,6 +18,9 @@ public class AlunoGet
         UserInfo userInfo,
         int page = 1, int row = 10, string orderBy = "Nome", string sortOrder = "asc")
     {
+        if (context.Alunos == null)
+            return Results.UnprocessableEntity();
+        
         if (row > 100)
             return Results.Problem(title: "Max row value must be 100", statusCode: 400);
 

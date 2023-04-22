@@ -14,6 +14,9 @@ public class AlunoDelete
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Alunos == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var aluno = context.Alunos.Where(e => e.Id == id).FirstOrDefault();
@@ -42,7 +45,7 @@ public class AlunoDelete
     }
     private static void TemMatricula(ApplicationDbContext context, Guid alunoId)
     {
-        if (context.Matriculas.Where(t => t.AlunoId == alunoId).Any())
+        if (context.Matriculas!.Where(t => t.AlunoId == alunoId).Any())
             errorMessages.Add("Existe(m) Matrícula(s) vinculada(s)");
     }
 
