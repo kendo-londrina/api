@@ -20,7 +20,7 @@ public class SendGridEmailSender : IEmailSender
     {
         //return Execute(Options.SendGridKey, subject, message, email);
         var sendGridKey = configuration["SENDGRID_API_KEY"];
-        return Execute(sendGridKey, subject, message, email);
+        return Execute(sendGridKey!, subject, message, email);
     }
     public Task Execute(string apiKey, string subject, string message, string email)
     {

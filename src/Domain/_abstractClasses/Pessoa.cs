@@ -14,6 +14,11 @@ public abstract class Pessoa: Entity
     public string? TelCelular { get; protected set; }
     public string? Religiao { get; protected set; }
 
+    public Pessoa(string nome)
+    {
+        this.Nome = nome;
+    }
+
     public Pessoa(string nome,
         DateTime? dataNascimento,
         string? nacionalidade,
