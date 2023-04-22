@@ -16,7 +16,7 @@ public class Turma : Entity
     public DateTime? DataFinal { get; private set; }
 
     virtual public Curso? Curso { get; private set; }
-    virtual public Escolas.Escola? Escola { get; private set; }
+    virtual public Escola? Escola { get; private set; }
 
     public Turma(
         Guid escolaId,
