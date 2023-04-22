@@ -1,6 +1,6 @@
 ﻿using w_escolas.Domain._abstractClasses;
 using w_escolas.Domain.Enderecos;
-using w_escolas.Domain.Escolas;
+using w_escolas.Domain.Escola;
 using w_escolas.Domain.Matriculas;
 
 namespace w_escolas.Domain.Alunos;
@@ -8,7 +8,7 @@ namespace w_escolas.Domain.Alunos;
 public class Aluno : Pessoa
 {
     public Guid EscolaId { get; private set; }
-    virtual public Escola? Escola { get; private set; }
+    virtual public Escola.Escola? Escola { get; private set; }
     public string? Codigo { get; private set; }
     public Guid? EnderecoId { get; private set; }
 

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace w_escolas.Domain.Escolas;
+namespace w_escolas.Domain.Escola;
 
 public class EscolaValidator : AbstractValidator<Escola>
 {

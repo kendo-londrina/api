@@ -1,7 +1,7 @@
 ﻿using w_escolas.Domain._abstractClasses;
 using w_escolas.Domain.Alunos;
 using w_escolas.Domain.Cursos;
-using w_escolas.Domain.Escolas;
+using w_escolas.Domain.Escola;
 using w_escolas.Domain.Temporadas;
 
 namespace w_escolas.Domain.Matriculas;
@@ -15,7 +15,7 @@ public class Matricula : Entity
     public DateTime DataMatricula { get; private set; }
     public bool Cancelada { get; private set; }
 
-    virtual public Escola? Escola { get; private set; }
+    virtual public Escola.Escola? Escola { get; private set; }
     virtual public Curso? Curso { get; private set; }
     virtual public Aluno? Aluno { get; private set; }
     virtual public Temporada? Temporada { get; private set; }

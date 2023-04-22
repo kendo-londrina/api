@@ -1,13 +1,13 @@
 using w_escolas.Domain._abstractClasses;
 using w_escolas.Domain.Enderecos;
-using w_escolas.Domain.Escolas;
+using w_escolas.Domain.Escola;
 
 namespace w_escolas.Domain.Alunos;
 
 public class ResponsavelPeloAluno : Pessoa
 {
     public Guid EscolaId { get; private set; }
-    virtual public Escola? Escola { get; private set; }
+    virtual public Escola.Escola? Escola { get; private set; }
     public Guid AlunoId { get; private set; }
     virtual public Aluno? Aluno { get; private set; }
     public Guid? EnderecoId { get; private set; }

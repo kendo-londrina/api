@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using w_escolas.Domain.Escolas;
+using w_escolas.Domain.Escola;
 using w_escolas.Endpoints.Escolas.dtos;
 using w_escolas.Infra.Data;
 using w_escolas.Shared;
