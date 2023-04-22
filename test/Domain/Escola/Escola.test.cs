@@ -1,6 +1,5 @@
 using Bogus;
 using FluentAssertions;
-// using w_escolas.Domain.Escolas;
 
 namespace w_escolas.Domain.Escolas;
 

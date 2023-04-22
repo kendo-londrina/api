@@ -1,8 +1,7 @@
 using Bogus;
 using FluentAssertions;
-using w_escolas.Domain.Cursos;
 
-namespace kendo_londrina_test.Domain.Cursos;
+namespace w_escolas.Domain.Cursos;
 
 public class CursoTest
 {
@@ -27,4 +26,38 @@ public class CursoTest
         curso.Ordem.Should().Be(ordem);
         curso.TipoDeCursoId.Should().Be(tipo);
     }
+
+    [Fact(DisplayName = nameof(Alterar))]
+    public void Alterar()
+    {
+        var faker = new Faker("pt_BR");
+
+        var curso = new Curso(
+            new Guid(),
+            faker.Random.AlphaNumeric(5),
+            faker.Commerce.Department(),
+            faker.Random.Int(1, 100),
+            new Guid()
+        );
+
+        var tipoDeCursoIdAlterado = new Guid();
+        var codigoAlterado = faker.Random.AlphaNumeric(5);
+        var nomeAlterado = faker.Commerce.Department();
+        var ordemAlterado = faker.Random.Int(1, 100);
+
+
+        curso.Alterar(
+            tipoDeCursoIdAlterado,
+            codigoAlterado,
+            nomeAlterado,
+            ordemAlterado
+        );
+
+        curso.Should().NotBeNull();
+        curso.Codigo.Should().Be(codigoAlterado);
+        curso.Nome.Should().Be(nomeAlterado);
+        curso.Ordem.Should().Be(ordemAlterado);
+        curso.TipoDeCursoId.Should().Be(tipoDeCursoIdAlterado);
+    }
+
 }
