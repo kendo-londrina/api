@@ -14,6 +14,9 @@ public class AlunoPost
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Alunos == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var aluno = DtoToObj(escolaIdDoUsuarioCorrente, alunoRequest);
@@ -54,7 +57,7 @@ public class AlunoPost
     {
         if (aluno.Codigo is not null && aluno.Codigo != "")
         {
-            if (context.Alunos.Where(t =>
+            if (context.Alunos!.Where(t =>
                 t.Codigo == aluno.Codigo &&
                 t.EscolaId == aluno.EscolaId).Any())
             {

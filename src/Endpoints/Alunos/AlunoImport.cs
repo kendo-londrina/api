@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Logging;
-using System.Net;
-using w_escolas.Domain.Alunos;
-using w_escolas.Endpoints.Alunos.dtos;
-using w_escolas.Infra.Data;
+﻿using w_escolas.Domain.Alunos;
 using w_escolas.Shared;
 
 namespace w_escolas.Endpoints.Alunos;
@@ -29,7 +24,7 @@ public class AlunoImport
         var file = request.Form.Files[0];
         var read = file.OpenReadStream();
 
-        var fileContent = "";
+        // var fileContent = "";
         var cont = 0;
         using (var reader = new StreamReader(read, System.Text.Encoding.UTF8))
         {

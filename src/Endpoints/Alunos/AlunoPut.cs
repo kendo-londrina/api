@@ -16,7 +16,7 @@ public class AlunoPut
         ApplicationDbContext context,
         UserInfo userInfo)
     {
-        var aluno = context.Alunos.Where(e => e.Id == id).FirstOrDefault();
+        var aluno = context.Alunos!.Where(e => e.Id == id).FirstOrDefault();
         if (aluno == null)
             return Results.NotFound();
 
@@ -48,7 +48,7 @@ public class AlunoPut
         if (NaoPodeAlterar(context, aluno))
             return Results.ValidationProblem(errorMessages.ConvertToProblemDetails());
 
-        context.Alunos.Update(aluno);
+        context.Alunos!.Update(aluno);
         context.SaveChanges();
         return Results.Ok();
     }
@@ -59,7 +59,7 @@ public class AlunoPut
     {
         if (aluno.Codigo is not null && aluno.Codigo != "")
         {
-            if (context.Alunos.Where(t =>
+            if (context.Alunos!.Where(t =>
                 t.EscolaId == aluno.EscolaId &&
                 t.Codigo == aluno.Codigo &&
                 t.Id != aluno.Id).Any())

@@ -15,6 +15,9 @@ public class EnderecoPost
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Alunos == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var aluno = DtoToObj(escolaIdDoUsuarioCorrente, alunoRequest);
@@ -53,7 +56,7 @@ public class EnderecoPost
 
     private static void VerificarComMesmoCodigo(ApplicationDbContext context, Aluno aluno)
     {
-        if (context.Alunos.Where(t =>
+        if (context.Alunos!.Where(t =>
             t.Codigo == aluno.Codigo &&
             t.EscolaId == aluno.EscolaId).Any())
             errorMessages.Add($"Já existe Aluno com código {aluno.Codigo}.");
