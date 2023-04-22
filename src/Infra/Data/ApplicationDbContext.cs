@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using w_escolas.Domain.Alunos;
 using w_escolas.Domain.Cursos;
 using w_escolas.Domain.Enderecos;
-using w_escolas.Domain.Escola;
+using w_escolas.Domain.Escolas;
 using w_escolas.Domain.Matriculas;
 using w_escolas.Domain.Temporadas;
 using w_escolas.Domain.TiposDeCursos;

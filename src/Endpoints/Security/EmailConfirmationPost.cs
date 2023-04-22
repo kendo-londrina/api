@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Security.Claims;
 using System.Text;
-using w_escolas.Domain.Escola;
+using w_escolas.Domain.Escolas;
 
 namespace w_escolas.Endpoints.Security;
 

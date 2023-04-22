@@ -1,5 +1,5 @@
 ﻿using w_escolas.Domain._abstractClasses;
-using w_escolas.Domain.Escola;
+using w_escolas.Domain.Escolas;
 using w_escolas.Domain.Matriculas;
 using w_escolas.Domain.TiposDeCursos;
 using w_escolas.Domain.Turmas;
@@ -15,7 +15,7 @@ public class Curso : Entity
     public Guid EscolaId { get; private set; }
 
     virtual public TipoDeCurso? TipoDeCurso { get; private set; }
-    virtual public Escola.Escola? Escola { get; private set; }
+    virtual public Escolas.Escola? Escola { get; private set; }
     virtual public IEnumerable<Turma>? Turmas { get; private set; }
     virtual public IEnumerable<Matricula>? Matriculas { get; private set; }
 

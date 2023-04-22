@@ -7,7 +7,7 @@ using w_escolas.Domain.Temporadas;
 using w_escolas.Domain.TiposDeCursos;
 using w_escolas.Domain.Turmas;
 
-namespace w_escolas.Domain.Escola;
+namespace w_escolas.Domain.Escolas;
 
 public class Escola : Entity
 {

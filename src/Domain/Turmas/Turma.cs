@@ -1,6 +1,6 @@
 ﻿using w_escolas.Domain._abstractClasses;
 using w_escolas.Domain.Cursos;
-using w_escolas.Domain.Escola;
+using w_escolas.Domain.Escolas;
 
 namespace w_escolas.Domain.Turmas;
 
@@ -16,7 +16,7 @@ public class Turma : Entity
     public DateTime? DataFinal { get; private set; }
 
     virtual public Curso? Curso { get; private set; }
-    virtual public Escola.Escola? Escola { get; private set; }
+    virtual public Escolas.Escola? Escola { get; private set; }
 
     public Turma(
         Guid escolaId,

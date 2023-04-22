@@ -1,8 +1,8 @@
 using Bogus;
 using FluentAssertions;
-using w_escolas.Domain.Escola;
+// using w_escolas.Domain.Escolas;
 
-namespace w_escolas.Domain.Escola;
+namespace w_escolas.Domain.Escolas;
 
 public class EscolaTest
 {
