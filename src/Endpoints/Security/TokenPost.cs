@@ -35,7 +35,7 @@ public class TokenPost
         var claims = await userManager.GetClaimsAsync(user);
         var escolaId = claims.FirstOrDefault((claim) => claim.Type == "EscolaId")!.Value;
 
-        var key = Encoding.ASCII.GetBytes(configuration["JwtBearerTokenSettings:SecretKey"]);
+        var key = Encoding.ASCII.GetBytes(configuration["JwtBearerTokenSettings:SecretKey"]!);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new Claim[]

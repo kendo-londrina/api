@@ -17,6 +17,9 @@ public class TipoDeCursoPut
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.TiposDeCursos == null)
+            return Results.UnprocessableEntity();
+
         var tipoDeCurso = context.TiposDeCursos.Where(e => e.Id == id).FirstOrDefault();
         if (tipoDeCurso == null)
             return Results.NotFound();
@@ -47,7 +50,7 @@ public class TipoDeCursoPut
 
     private static void VerificarComMesmoCodigo(ApplicationDbContext context, TipoDeCurso tipoDeCurso)
     {
-        if (context.TiposDeCursos.Where(
+        if (context.TiposDeCursos!.Where(
             t => t.Codigo == tipoDeCurso.Codigo
             && t.Id != tipoDeCurso.Id).Any())
             errorMessages.Add($"Já existe Tipo de Curso com código {tipoDeCurso.Codigo}.");
@@ -55,7 +58,7 @@ public class TipoDeCursoPut
 
     private static void VerificarComMesmoNome(ApplicationDbContext context, TipoDeCurso tipoDeCurso)
     {
-        if (context.TiposDeCursos.Where(
+        if (context.TiposDeCursos!.Where(
             t => t.Nome == tipoDeCurso.Nome
             && t.Id != tipoDeCurso.Id).Any())
             errorMessages.Add($"Já existe Tipo de Curso com nome {tipoDeCurso.Nome}.");

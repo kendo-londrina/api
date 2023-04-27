@@ -15,6 +15,9 @@ public class AlunoImport
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Alunos == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         //Console.WriteLine(">>>>>>>>>>");

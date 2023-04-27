@@ -14,7 +14,7 @@ using w_escolas.Shared;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSqlServer<ApplicationDbContext>(
-    builder.Configuration["Database:ConnectionString"]);
+    builder.Configuration["Database:ConnectionString"]!);
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
@@ -45,7 +45,7 @@ builder.Services.AddAuthentication(x =>
         ValidIssuer = builder.Configuration["JwtBearerTokenSettings:Issuer"],
         ValidAudience = builder.Configuration["JwtBearerTokenSettings:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(builder.Configuration["JwtBearerTokenSettings:SecretKey"]))
+            Encoding.UTF8.GetBytes(builder.Configuration["JwtBearerTokenSettings:SecretKey"]!))
     };
 });
 builder.Services.AddAuthorization(options =>
