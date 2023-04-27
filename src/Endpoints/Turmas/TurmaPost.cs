@@ -15,6 +15,9 @@ public class TurmaPost
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Turmas == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var turma = DtoToObj(escolaIdDoUsuarioCorrente, turmaRequest);
@@ -48,7 +51,7 @@ public class TurmaPost
 
     private static void VerificarComMesmoCodigo(ApplicationDbContext context, Turma turma)
     {
-        if (context.Turmas.Where(t =>
+        if (context.Turmas!.Where(t =>
             t.Codigo == turma.Codigo &&
             t.EscolaId == turma.EscolaId).Any())
             errorMessages.Add($"Já existe Turma com código {turma.Codigo}.");
@@ -56,7 +59,7 @@ public class TurmaPost
 
     private static void VerificarComMesmoNome(ApplicationDbContext context, Turma turma)
     {
-        if (context.Turmas.Where(t =>
+        if (context.Turmas!.Where(t =>
             t.Nome == turma.Nome &&
             t.EscolaId == turma.EscolaId).Any())
             errorMessages.Add($"Já existe Turma com nome {turma.Nome}.");

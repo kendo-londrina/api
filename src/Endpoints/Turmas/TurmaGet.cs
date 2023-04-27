@@ -17,6 +17,9 @@ public class TurmaGet
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Turmas == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var turmas = GetByFilter(context, filter!, escolaIdDoUsuarioCorrente);
@@ -59,7 +62,7 @@ public class TurmaGet
 
     private static List<Turma> GetAll(ApplicationDbContext context, Guid escolaId)
     {
-        var ret = context.Turmas
+        var ret = context.Turmas!
             .Include(t => t.Curso)
             .Where(t => t.EscolaId == escolaId)
             .OrderBy(t => t.Curso!.Ordem).ThenBy(t => t.Ordem).ToList();
@@ -68,14 +71,14 @@ public class TurmaGet
 
     private static List<Turma> GetById(ApplicationDbContext context, string turmaId)
     {
-        return context.Turmas
+        return context.Turmas!
             .Include(t => t.Curso)
             .Where(t => t.Id.ToString() == turmaId).ToList();
     }
 
     private static List<Turma> GetByCurso(ApplicationDbContext context, string cursoId)
     {
-        return context.Turmas
+        return context.Turmas!
             .Include(t => t.Curso)
             .Where(t => t.CursoId.ToString() == cursoId)
             .OrderBy(t => t.Curso!.Ordem).ThenBy(t => t.Ordem).ToList();
@@ -83,7 +86,7 @@ public class TurmaGet
 
     private static List<Turma> GetByCodigoOuNome(ApplicationDbContext context, string codigoOuNome, Guid escolaId)
     {
-        var ret = context.Turmas
+        var ret = context.Turmas!
             .Include(t => t.Curso)
             .Where(t => t.EscolaId == escolaId &&
                 (t.Codigo.Contains(codigoOuNome) || t.Nome.Contains(codigoOuNome)))

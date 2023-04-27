@@ -18,6 +18,9 @@ public class TurmaPut
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Turmas == null)
+            return Results.UnprocessableEntity();
+
         var turma = context.Turmas.Where(e => e.Id == id).FirstOrDefault();
         if (turma == null)
             return Results.NotFound();
@@ -52,7 +55,7 @@ public class TurmaPut
 
     private static void VerificarComMesmoCodigo(ApplicationDbContext context, Turma turma)
     {
-        if (context.Turmas.Where(t =>
+        if (context.Turmas!.Where(t =>
             t.EscolaId == turma.EscolaId &&
             t.Codigo == turma.Codigo &&
             t.Id != turma.Id).Any())
@@ -61,7 +64,7 @@ public class TurmaPut
 
     private static void VerificarComMesmoNome(ApplicationDbContext context, Turma turma)
     {
-        if (context.Turmas.Where(t =>
+        if (context.Turmas!.Where(t =>
             t.EscolaId == turma.EscolaId &&
             t.Nome == turma.Nome &&
             t.Id != turma.Id).Any())

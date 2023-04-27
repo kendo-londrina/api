@@ -15,6 +15,9 @@ public class TurmaDelete
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Turmas == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var turma = context.Turmas.Where(e => e.Id == id).FirstOrDefault();
