@@ -15,6 +15,9 @@ public class CursoDelete
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Cursos == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var curso = context.Cursos.Where(e => e.Id == id).FirstOrDefault();
@@ -38,7 +41,7 @@ public class CursoDelete
     private static readonly List<string> errorMessages = new();
     private static void TemTurmaVinculada(ApplicationDbContext context, Guid cursoId)
     {
-        if (context.Turmas.Where(t => t.CursoId == cursoId).Any())
+        if (context.Turmas!.Where(t => t.CursoId == cursoId).Any())
             errorMessages.Add("Existem Turmas(s) vinculada(s)");
     }
     private static bool NaoPodeExcluir(ApplicationDbContext context, Guid cursoId)

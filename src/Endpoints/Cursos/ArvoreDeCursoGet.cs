@@ -16,61 +16,21 @@ public class ArvoreDeCursoGet
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.TiposDeCursos == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var tiposCursosTurmas = ObterTiposCursosTurmas(context, escolaIdDoUsuarioCorrente);
 
         var arvore = MontarArvore(tiposCursosTurmas);
 
-        //var cursos = GetAll(context, escolaIdDoUsuarioCorrente)
-        //    .GroupBy(t => new { t.TipoDeCurso!.Id, t.TipoDeCurso!.Codigo, t.TipoDeCurso!.Nome, t.TipoDeCurso!.Ordem })
-        //    .Select(g => new
-        //    {
-        //        TipoDeCursoId = g.Key.Id,
-        //        CodTipoDeCurso = g.Key.Codigo,
-        //        NomeTipoDeCurso = g.Key.Nome,
-        //        Ordem = g.Key.Ordem,
-        //        CursoObj = g.OrderBy(c => c.Ordem)
-        //    });
-        //var arvore = new List<ArvoreDeCursoResponse>();
-        //foreach (var group in cursos)
-        //{
-        //    var cursosList = new List<CursoResponse>();
-        //    foreach (var curso in group.CursoObj)
-        //    {
-        //        cursosList.Add(new CursoResponse
-        //        {
-        //            Id = curso.Id,
-        //            Codigo = curso.Codigo,
-        //            Nome = curso.Nome,
-        //            Ordem = curso.Ordem
-        //        });
-        //    }
-        //    arvore.Add(new ArvoreDeCursoResponse
-        //    {
-        //        TipoDeCursoId = group.TipoDeCursoId,
-        //        CodTipoDeCurso = group.CodTipoDeCurso,
-        //        NomeTipoDeCurso = group.NomeTipoDeCurso,
-        //        Ordem = group.Ordem,
-        //        Cursos = cursosList
-        //    });
-        //}
-
         return Results.Ok(arvore);
-    }
-
-    private static List<Curso> GetAll(ApplicationDbContext context, Guid escolaId)
-    {
-        var ret = context.Cursos
-            .Include(t => t.TipoDeCurso)
-            .Where(t => t.EscolaId == escolaId)
-            .OrderBy(t => t.TipoDeCurso!.Ordem).ThenBy(t => t.Ordem).ToList();
-        return ret;
     }
 
     private static List<TipoDeCurso> ObterTiposCursosTurmas(ApplicationDbContext context, Guid escolaId)
     {
-        var ret = context.TiposDeCursos
+        var ret = context.TiposDeCursos!
             .Include(t => t.Cursos!.OrderBy(curso => curso.Ordem))
             .ThenInclude(c => c.Turmas)
             .Where(t => t.EscolaId == escolaId)
