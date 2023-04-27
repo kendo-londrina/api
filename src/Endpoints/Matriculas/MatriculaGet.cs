@@ -21,6 +21,9 @@ public class MatriculaGet
         UserInfo userInfo,
         int page = 1, int row = 10, string orderBy = "Curso", string sortOrder = "asc")
     {
+        if (context.Matriculas == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var queryBase = context.Matriculas.AsNoTracking()
@@ -112,20 +115,20 @@ public class MatriculaGet
 
     private static List<Matricula> GetAll(ApplicationDbContext context, Guid escolaId)
     {
-        return context.Matriculas
+        return context.Matriculas!
             .Where(t => t.EscolaId == escolaId)
             .OrderBy(t => t.DataMatricula).ToList();
     }
     private static List<Matricula> GetById(ApplicationDbContext context, string id)
     {
-        return context.Matriculas
+        return context.Matriculas!
             .Where(t => t.Id.ToString() == id).ToList();
     }
     private static List<Matricula> GetByTemporada(
         ApplicationDbContext context,
         string temporadaId)
     {
-        return context.Matriculas
+        return context.Matriculas!
             .Where(t => t.TemporadaId.ToString() == temporadaId)
             .OrderBy(t => t.DataMatricula).ToList();
     }

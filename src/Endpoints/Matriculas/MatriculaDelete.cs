@@ -15,6 +15,9 @@ public class MatriculaDelete
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Matriculas == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var matricula = context.Matriculas.Where(e => e.Id == id).FirstOrDefault();

@@ -16,6 +16,9 @@ public class TemporadaGet
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Temporadas == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var temporadas = Get(context, filter!, escolaIdDoUsuarioCorrente);
@@ -74,13 +77,13 @@ public class TemporadaGet
 
     private static List<Temporada> GetAll(ApplicationDbContext context, Guid escolaId)
     {
-        return context.Temporadas
+        return context.Temporadas!
             .Where(t => t.EscolaId == escolaId)
             .OrderBy(t => t.Nome).ToList();
     }
     private static List<Temporada> GetById(ApplicationDbContext context, string id)
     {
-        return context.Temporadas
+        return context.Temporadas!
             .Where(t => t.Id.ToString() == id).ToList();
     }
 
@@ -89,7 +92,7 @@ public class TemporadaGet
         TemporadaFilter filter,
         Guid escolaId)
     {
-        return context.Temporadas
+        return context.Temporadas!
             .Where(t => t.EscolaId == escolaId && t.Ano.ToString() == filter.Ano
                 && (filter.CodigoOuNome == null
                     || t.Codigo.Contains(filter.CodigoOuNome)
@@ -102,7 +105,7 @@ public class TemporadaGet
         TemporadaFilter filter,
         Guid escolaId)
     {
-        return context.Temporadas
+        return context.Temporadas!
             .Where(t => t.EscolaId == escolaId && t.Ano.HasValue == false
                 && (filter.CodigoOuNome == null
                     || t.Codigo.Contains(filter.CodigoOuNome)
@@ -115,7 +118,7 @@ public class TemporadaGet
         TemporadaFilter filter,
         Guid escolaId)
     {
-        return context.Temporadas
+        return context.Temporadas!
             .Where(t => t.EscolaId == escolaId
                 && (filter.CodigoOuNome == null
                     || t.Codigo.Contains(filter.CodigoOuNome)

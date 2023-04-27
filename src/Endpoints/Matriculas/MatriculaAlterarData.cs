@@ -17,6 +17,9 @@ public class MatriculaAlterarData
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Matriculas == null)
+            return Results.UnprocessableEntity();
+
         var matricula = context.Matriculas.Where(e => e.Id == id).FirstOrDefault();
         if (matricula == null)
             return Results.NotFound();
