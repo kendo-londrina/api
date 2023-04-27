@@ -17,6 +17,9 @@ public class EscolaPut
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Escolas == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
         if (id != escolaIdDoUsuarioCorrente)
             return Results.ValidationProblem(

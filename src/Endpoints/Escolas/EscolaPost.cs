@@ -14,6 +14,9 @@ public class EscolaPost
     [Authorize(Policy = "AdminPolicy")]
     public static IResult Action(EscolaRequest escolaRequest, ApplicationDbContext context)
     {
+        if (context.Escolas == null)
+            return Results.UnprocessableEntity();
+
         var escola = DtoToObj(escolaRequest);
         var validator = new EscolaValidator();
         var validation = validator.Validate(escola);
