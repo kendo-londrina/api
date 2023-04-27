@@ -13,6 +13,9 @@ public class EscolaDelete
     [Authorize(Policy = "AdminPolicy")]
     public static IResult Action([FromRoute] Guid id, ApplicationDbContext context)
     {
+        if (context.Escolas == null)
+            return Results.UnprocessableEntity();
+
         var escola = context.Escolas.Where(e => e.Id == id).FirstOrDefault();
         if (escola == null)
         {

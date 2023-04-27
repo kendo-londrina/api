@@ -21,6 +21,9 @@ public class EmailConfirmationPost
         UserManager<IdentityUser> userManager,
         ApplicationDbContext context)
     {
+        if (context.Escolas == null)
+            return Results.UnprocessableEntity();
+
         if (confirmacaoDeEmail.UserId == null || confirmacaoDeEmail.Code == null)
             return Results.ValidationProblem("Informações necessárias não fornecidas".ConvertToProblemDetails());
 
@@ -63,7 +66,7 @@ public class EmailConfirmationPost
             $"escola de {userId}",
             "NI", "NI"
         );
-        context.Escolas.Add(escola);
+        context.Escolas!.Add(escola);
         await context.SaveChangesAsync();
 
         return escola;

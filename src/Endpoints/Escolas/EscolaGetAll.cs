@@ -13,6 +13,9 @@ public class EscolaGetAll
     [Authorize(Policy = "AdminPolicy")]
     public static IResult Action(ApplicationDbContext context)
     {
+        if (context.Escolas == null)
+            return Results.UnprocessableEntity();
+
         var escolas = context.Escolas.ToList();
         var response = escolas.Select(
             e => new EscolaResponse
