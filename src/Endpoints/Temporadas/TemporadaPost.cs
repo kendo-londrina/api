@@ -16,6 +16,9 @@ public class TemporadaPost
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Temporadas == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var temporada = DtoToObj(escolaIdDoUsuarioCorrente, temporadaRequest);
@@ -51,7 +54,7 @@ public class TemporadaPost
 
     private static void VerificarComMesmoCodigo(ApplicationDbContext context, Temporada temporada)
     {
-        if (context.Temporadas.Where(t =>
+        if (context.Temporadas!.Where(t =>
             t.EscolaId == temporada.EscolaId &&
             t.Codigo == temporada.Codigo).Any())
             errorMessages.Add($"Já existe Temporada com código {temporada.Codigo}.");
@@ -59,7 +62,7 @@ public class TemporadaPost
 
     private static void VerificarComMesmoNome(ApplicationDbContext context, Temporada temporada)
     {
-        if (context.Temporadas.Where(t =>
+        if (context.Temporadas!.Where(t =>
             t.EscolaId == temporada.EscolaId &&
             t.Nome == temporada.Nome).Any())
                 errorMessages.Add($"Já existe Temporada com nome {temporada.Nome}.");

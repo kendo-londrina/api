@@ -13,6 +13,9 @@ public class TemporadaGetAnos
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Temporadas == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var anos = GetDistinctAno(context, escolaIdDoUsuarioCorrente);
@@ -24,7 +27,7 @@ public class TemporadaGetAnos
         ApplicationDbContext context,
         Guid escolaId)
     {
-        var anos = context.Temporadas
+        var anos = context.Temporadas!
             .Where(t => t.EscolaId == escolaId)
             .Select(t => t.Ano)
             .Distinct();

@@ -17,6 +17,9 @@ public class TemporadaPut
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Temporadas == null)
+            return Results.UnprocessableEntity();
+
         var temporada = context.Temporadas.Where(e => e.Id == id).FirstOrDefault();
         if (temporada == null)
             return Results.NotFound();
@@ -52,7 +55,7 @@ public class TemporadaPut
 
     private static void VerificarComMesmoCodigo(ApplicationDbContext context, Temporada temporada)
     {
-        if (context.Temporadas.Where(
+        if (context.Temporadas!.Where(
             t => t.Codigo == temporada.Codigo
             && t.Id != temporada.Id).Any())
             errorMessages.Add($"Já existe Temporada com código {temporada.Codigo}.");
@@ -60,7 +63,7 @@ public class TemporadaPut
 
     private static void VerificarComMesmoNome(ApplicationDbContext context, Temporada temporada)
     {
-        if (context.Temporadas.Where(
+        if (context.Temporadas!.Where(
             t => t.Nome == temporada.Nome
             && t.Id != temporada.Id).Any())
             errorMessages.Add($"Já existe Temporada com nome {temporada.Nome}.");

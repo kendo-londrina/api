@@ -15,6 +15,9 @@ public class TemporadaDelete
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Temporadas == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var temporada = context.Temporadas.Where(e => e.Id == id).FirstOrDefault();

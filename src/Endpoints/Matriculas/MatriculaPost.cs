@@ -16,6 +16,9 @@ public class MatriculaPost
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Matriculas == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var matricula = DtoToObj(escolaIdDoUsuarioCorrente, matriculaRequest);
@@ -47,7 +50,7 @@ public class MatriculaPost
 
     private static void VerificarDuplicidade(ApplicationDbContext context, Matricula matricula)
     {
-        if (context.Matriculas.Where(t =>
+        if (context.Matriculas!.Where(t =>
             t.CursoId == matricula.CursoId &&
             t.AlunoId == matricula.AlunoId &&
             t.TemporadaId == matricula.TemporadaId).Any())
