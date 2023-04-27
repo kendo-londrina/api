@@ -17,6 +17,9 @@ public class CursoGet
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Cursos == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var cursos = GetByFilter(context, filter!, escolaIdDoUsuarioCorrente);
@@ -56,7 +59,7 @@ public class CursoGet
 
     private static List<Curso> GetAll(ApplicationDbContext context, Guid escolaId)
     {
-        var ret = context.Cursos
+        var ret = context.Cursos!
             .Include(t => t.TipoDeCurso)
             .Where(t => t.EscolaId == escolaId)
             .OrderBy(t => t.TipoDeCurso!.Ordem).ThenBy(t => t.Ordem).ToList();
@@ -65,14 +68,14 @@ public class CursoGet
 
     private static List<Curso> GetById(ApplicationDbContext context, string CursoId)
     {
-        return context.Cursos
+        return context.Cursos!
             .Include(t => t.TipoDeCurso)
             .Where(t => t.Id.ToString() == CursoId).ToList();
     }
 
     private static List<Curso> GetByTipoDeCurso(ApplicationDbContext context, string tipoDeCursoId)
     {
-        return context.Cursos
+        return context.Cursos!
             .Include(t => t.TipoDeCurso)
             .Where(t => t.TipoDeCursoId.ToString() == tipoDeCursoId)
             .OrderBy(t => t.TipoDeCurso!.Ordem).ThenBy(t => t.Ordem).ToList();
@@ -80,7 +83,7 @@ public class CursoGet
 
     private static List<Curso> GetByCodigoOuNome(ApplicationDbContext context, string codigoOuNome, Guid escolaId)
     {
-        var ret = context.Cursos
+        var ret = context.Cursos!
             .Include(t => t.TipoDeCurso)
             .Where(t => t.EscolaId == escolaId &&
                 (t.Codigo.Contains(codigoOuNome) || t.Nome.Contains(codigoOuNome)))

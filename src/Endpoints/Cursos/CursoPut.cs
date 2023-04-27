@@ -17,6 +17,9 @@ public class CursoPut
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.Cursos == null)
+            return Results.UnprocessableEntity();
+
         var curso = context.Cursos.Where(e => e.Id == id).FirstOrDefault();
         if (curso == null)
             return Results.NotFound();
@@ -48,7 +51,7 @@ public class CursoPut
 
     private static void VerificarComMesmoCodigo(ApplicationDbContext context, Curso curso)
     {
-        if (context.Cursos.Where(t =>
+        if (context.Cursos!.Where(t =>
             t.EscolaId == curso.EscolaId &&
             t.Codigo == curso.Codigo &&
             t.Id != curso.Id).Any())
@@ -57,7 +60,7 @@ public class CursoPut
 
     private static void VerificarComMesmoNome(ApplicationDbContext context, Curso curso)
     {
-        if (context.Cursos.Where(t =>
+        if (context.Cursos!.Where(t =>
             t.EscolaId == curso.EscolaId &&
             t.Nome == curso.Nome &&
             t.Id != curso.Id).Any())
