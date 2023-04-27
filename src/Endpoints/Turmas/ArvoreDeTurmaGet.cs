@@ -16,6 +16,9 @@ public class ArvoreDeTurmaGet
         ApplicationDbContext context,
         UserInfo userInfo)
     {
+        if (context.TiposDeCursos == null)
+            return Results.UnprocessableEntity();
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
         var tiposCursosTurmas = ObterTiposCursosTurmas(context, escolaIdDoUsuarioCorrente);
@@ -67,7 +70,7 @@ public class ArvoreDeTurmaGet
 
     private static List<TipoDeCurso> ObterTiposCursosTurmas(ApplicationDbContext context, Guid escolaId)
     {
-        var ret = context.TiposDeCursos
+        var ret = context.TiposDeCursos!
             .Include(t => t.Cursos!.OrderBy(curso => curso.Ordem))
             .ThenInclude(c => c.Turmas)
             .Where(t => t.EscolaId == escolaId)
