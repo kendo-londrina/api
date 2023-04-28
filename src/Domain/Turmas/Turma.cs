@@ -24,18 +24,18 @@ public class Turma : Entity
         string codigo,
         string nome,
         int ordem,
-        int? maxAlunos,
-        DateTime? dataInicial,
-        DateTime? dataFinal)
+        int? maxAlunos = null,
+        DateTime? dataInicial = null,
+        DateTime? dataFinal = null)
     {
         EscolaId = escolaId;
         CursoId = cursoId;
         Codigo = codigo;
         Nome = nome;
         Ordem = ordem;
-        MaxAlunos = maxAlunos ?? null;
-        DataInicial = dataInicial ?? null;
-        DataFinal = dataFinal ?? null;
+        MaxAlunos = maxAlunos;
+        DataInicial = dataInicial;
+        DataFinal = dataFinal;
     }
 
     public void Alterar(
@@ -43,9 +43,9 @@ public class Turma : Entity
         string codigo,
         string nome,
         int ordem,
-        int? maxAlunos,
-        DateTime? dataInicial,
-        DateTime? dataFinal)
+        int? maxAlunos = null,
+        DateTime? dataInicial = null,
+        DateTime? dataFinal = null)
     {
         CursoId = cursoId;
         Codigo = codigo;
