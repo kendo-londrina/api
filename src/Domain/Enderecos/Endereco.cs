@@ -25,8 +25,15 @@ public class Endereco : Entity
         Tipo = tipo;
     }
 
-    public void Alterar()
+    public void Alterar(string? cep, string? uf, string? cidade, string? bairro, string? distrito, string? complemento, string? logradouro, string? tipo)
     {
-
+        Cep = cep;
+        Uf = uf;
+        Cidade = cidade;
+        Bairro = bairro;
+        Distrito = distrito;
+        Complemento = complemento;
+        Logradouro = logradouro;
+        Tipo = tipo;
     }
 }

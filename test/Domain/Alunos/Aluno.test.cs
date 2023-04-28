@@ -1,5 +1,6 @@
 using Bogus;
 using FluentAssertions;
+using w_escolas.Domain.Enderecos;
 
 namespace w_escolas.Domain.Alunos;
 
@@ -117,6 +118,33 @@ public class AlunoTest
         aluno.Email.Should().Be(emailAlterado);
         aluno.TelCelular.Should().Be(telCelularAlterado);
         aluno.Religiao.Should().Be(religiaoAlterado);
+    }
+
+    [Fact()]
+    public void AlterarEndereco() {
+        var faker = new Faker("pt_BR");
+
+        var aluno = new Aluno(
+            new Guid(),
+            faker.Person.FullName,
+            faker.Random.AlphaNumeric(10)
+        );
+
+        var endereco = new Endereco(
+            faker.Address.ZipCode(),
+            faker.Address.StateAbbr(),
+            faker.Address.City(),
+            faker.Address.County(),
+            faker.Address.County(),
+            faker.Address.SecondaryAddress(),
+            faker.Address.FullAddress(),
+            faker.Random.EnumValues<TipoDeEnderecoEnum>().ToString()
+        );
+
+        aluno.AlterarEndereco(endereco);
+
+        aluno.Should().NotBeNull();
+        aluno.Endereco.Should().Be(endereco);
     }
 
 }
