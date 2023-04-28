@@ -5,7 +5,7 @@ namespace w_escolas.Domain.Cursos;
 
 public class CursoTest
 {
-    [Fact(DisplayName = nameof(InstanciarObjeto))]
+    [Fact()]
     public void InstanciarObjeto()
     {
         var faker = new Faker("pt_BR");
@@ -27,7 +27,7 @@ public class CursoTest
         curso.TipoDeCursoId.Should().Be(tipo);
     }
 
-    [Fact(DisplayName = nameof(Alterar))]
+    [Fact()]
     public void Alterar()
     {
         var faker = new Faker("pt_BR");
