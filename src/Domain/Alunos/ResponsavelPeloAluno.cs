@@ -14,8 +14,16 @@ public class ResponsavelPeloAluno : Pessoa
     virtual public Endereco? Endereco { get; private set; }
 
     public ResponsavelPeloAluno(Guid escolaId,
+        Guid alunoId,
+        string nome) : base(nome)
+    {
+        this.EscolaId = escolaId;
+        this.AlunoId = alunoId;
+    }
+
+    public ResponsavelPeloAluno(Guid escolaId,
+        Guid alunoId,
         string nome,
-        string? codigo,
         DateTime? dataNascimento,
         string? nacionalidade,
         string? ufNascimento,
@@ -30,5 +38,6 @@ public class ResponsavelPeloAluno : Pessoa
             sexo, rg, cpf, email, telCelular, religiao)
     {
         this.EscolaId = escolaId;
+        this.AlunoId = alunoId;
     }
 }

@@ -42,9 +42,8 @@ public class Aluno : Pessoa
         this.Codigo = codigo;
     }
 
-    public void AlterarEndereco(Guid enderecoId, Endereco endereco)
+    public void AlterarEndereco(Endereco endereco)
     {
-        this.EnderecoId = enderecoId;
         this.Endereco = endereco;
     }
 
