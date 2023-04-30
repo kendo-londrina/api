@@ -4,7 +4,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.IdentityModel.Tokens;
+using w_escolas.Endpoints.Alunos;
+using w_escolas.Endpoints.Cursos;
+using w_escolas.Endpoints.Escolas;
+using w_escolas.Endpoints.Matriculas;
 using w_escolas.Endpoints.Security;
+using w_escolas.Endpoints.Temporadas;
+using w_escolas.Endpoints.TiposDeCursos;
+using w_escolas.Endpoints.Turmas;
 using w_escolas.Endpoints.Usuarios;
 using w_escolas.Infra.Data.DapperQueries;
 using w_escolas.Infra.Data.DapperQueries.Matriculas;
@@ -92,6 +99,48 @@ app.MapMethods(EmailConfirmationPost.Template, EmailConfirmationPost.Methods, Em
 app.MapMethods(TokenPost.Template, TokenPost.Methods, TokenPost.Handle);
 app.MapMethods(ForgottenPasswordPost.Template, ForgottenPasswordPost.Methods, ForgottenPasswordPost.Handle);
 app.MapMethods(PasswordResetPost.Template, PasswordResetPost.Methods, PasswordResetPost.Handle);
+
+app.MapMethods(EscolaPost.Template, EscolaPost.Methods, EscolaPost.Handle);
+app.MapMethods(EscolaGetAll.Template, EscolaGetAll.Methods, EscolaGetAll.Handle);
+app.MapMethods(EscolaPut.Template, EscolaPut.Methods, EscolaPut.Handle);
+app.MapMethods(EscolaDelete.Template, EscolaDelete.Methods, EscolaDelete.Handle);
+
+app.MapMethods(TipoDeCursoPost.Template, TipoDeCursoPost.Methods, TipoDeCursoPost.Handle);
+app.MapMethods(TipoDeCursoGet.Template, TipoDeCursoGet.Methods, TipoDeCursoGet.Handle);
+app.MapMethods(TipoDeCursoDelete.Template, TipoDeCursoDelete.Methods, TipoDeCursoDelete.Handle);
+app.MapMethods(TipoDeCursoPut.Template, TipoDeCursoPut.Methods, TipoDeCursoPut.Handle);
+
+app.MapMethods(CursoPost.Template, CursoPost.Methods, CursoPost.Handle);
+app.MapMethods(CursoGet.Template, CursoGet.Methods, CursoGet.Handle);
+app.MapMethods(CursoDelete.Template, CursoDelete.Methods, CursoDelete.Handle);
+app.MapMethods(CursoPut.Template, CursoPut.Methods, CursoPut.Handle);
+app.MapMethods(ArvoreDeCursoGet.Template, ArvoreDeCursoGet.Methods, ArvoreDeCursoGet.Handle);
+
+app.MapMethods(TurmaPost.Template, TurmaPost.Methods, TurmaPost.Handle);
+app.MapMethods(TurmaGet.Template, TurmaGet.Methods, TurmaGet.Handle);
+app.MapMethods(TurmaDelete.Template, TurmaDelete.Methods, TurmaDelete.Handle);
+app.MapMethods(TurmaPut.Template, TurmaPut.Methods, TurmaPut.Handle);
+
+app.MapMethods(AlunoPost.Template, AlunoPost.Methods, AlunoPost.Handle);
+app.MapMethods(AlunoGet.Template, AlunoGet.Methods, AlunoGet.Handle);
+app.MapMethods(AlunoDelete.Template, AlunoDelete.Methods, AlunoDelete.Handle);
+app.MapMethods(AlunoPut.Template, AlunoPut.Methods, AlunoPut.Handle);
+// app.MapMethods(AlunoImport.Template, AlunoImport.Methods, AlunoImport.Handle);
+
+app.MapMethods(TemporadaPost.Template, TemporadaPost.Methods, TemporadaPost.Handle);
+app.MapMethods(TemporadaGet.Template, TemporadaGet.Methods, TemporadaGet.Handle);
+app.MapMethods(TemporadaDelete.Template, TemporadaDelete.Methods, TemporadaDelete.Handle);
+app.MapMethods(TemporadaPut.Template, TemporadaPut.Methods, TemporadaPut.Handle);
+app.MapMethods(TemporadaGetAnos.Template, TemporadaGetAnos.Methods, TemporadaGetAnos.Handle);
+
+app.MapMethods(MatriculaPost.Template, MatriculaPost.Methods, MatriculaPost.Handle);
+app.MapMethods(MatriculaGet.Template, MatriculaGet.Methods, MatriculaGet.Handle);
+app.MapMethods(MatriculaDelete.Template, MatriculaDelete.Methods, MatriculaDelete.Handle);
+app.MapMethods(MatriculaCancelar.Template, MatriculaCancelar.Methods, MatriculaCancelar.Handle);
+app.MapMethods(MatriculaAlterarData.Template, MatriculaAlterarData.Methods, MatriculaAlterarData.Handle);
+app.MapMethods(MatriculasDoAlunoGet.Template, MatriculasDoAlunoGet.Methods, MatriculasDoAlunoGet.Handle);
+app.MapMethods(MatriculasDoCursoGet.Template, MatriculasDoCursoGet.Methods, MatriculasDoCursoGet.Handle);
+app.MapMethods(MatriculasDaTemporadaGet.Template, MatriculasDaTemporadaGet.Methods, MatriculasDaTemporadaGet.Handle);
 
 app.Run();
 
