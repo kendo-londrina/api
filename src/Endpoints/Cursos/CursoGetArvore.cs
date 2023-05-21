@@ -6,7 +6,7 @@ using w_escolas.Shared;
 
 namespace w_escolas.Endpoints.Cursos;
 
-public class ArvoreDeCursoGet
+public class CursoGetArvore
 {
     public static string Template => "/arvore-de-cursos";
     public static string[] Methods => new string[] { HttpMethod.Get.ToString() };

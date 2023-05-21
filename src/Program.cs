@@ -114,7 +114,7 @@ app.MapMethods(CursoPost.Template, CursoPost.Methods, CursoPost.Handle);
 app.MapMethods(CursoGet.Template, CursoGet.Methods, CursoGet.Handle);
 app.MapMethods(CursoDelete.Template, CursoDelete.Methods, CursoDelete.Handle);
 app.MapMethods(CursoPut.Template, CursoPut.Methods, CursoPut.Handle);
-app.MapMethods(ArvoreDeCursoGet.Template, ArvoreDeCursoGet.Methods, ArvoreDeCursoGet.Handle);
+app.MapMethods(CursoGetArvore.Template, CursoGetArvore.Methods, CursoGetArvore.Handle);
 
 app.MapMethods(TurmaPost.Template, TurmaPost.Methods, TurmaPost.Handle);
 app.MapMethods(TurmaGet.Template, TurmaGet.Methods, TurmaGet.Handle);
