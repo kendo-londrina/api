@@ -121,10 +121,10 @@ app.MapMethods(TurmaGet.Template, TurmaGet.Methods, TurmaGet.Handle);
 app.MapMethods(TurmaDelete.Template, TurmaDelete.Methods, TurmaDelete.Handle);
 app.MapMethods(TurmaPut.Template, TurmaPut.Methods, TurmaPut.Handle);
 
-app.MapMethods(AlunoPost.Template, AlunoPost.Methods, AlunoPost.Handle);
-app.MapMethods(AlunoGet.Template, AlunoGet.Methods, AlunoGet.Handle);
-app.MapMethods(AlunoDelete.Template, AlunoDelete.Methods, AlunoDelete.Handle);
-app.MapMethods(AlunoPut.Template, AlunoPut.Methods, AlunoPut.Handle);
+// app.MapMethods(AlunoPost.Template, AlunoPost.Methods, AlunoPost.Handle);
+// app.MapMethods(AlunoGet.Template, AlunoGet.Methods, AlunoGet.Handle);
+// app.MapMethods(AlunoDelete.Template, AlunoDelete.Methods, AlunoDelete.Handle);
+// app.MapMethods(AlunoPut.Template, AlunoPut.Methods, AlunoPut.Handle);
 // app.MapMethods(AlunoImport.Template, AlunoImport.Methods, AlunoImport.Handle);
 
 app.MapMethods(TemporadaPost.Template, TemporadaPost.Methods, TemporadaPost.Handle);
