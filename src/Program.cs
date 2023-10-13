@@ -21,15 +21,15 @@ using w_escolas.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var logger = new LoggerConfiguration()
-    // .WriteTo.Console(LogEventLevel.Information)
-    .ReadFrom.Configuration(builder.Configuration)
-    .Enrich.FromLogContext()
-    .CreateLogger();
-Log.Logger = logger;
-builder.Logging.ClearProviders();
-builder.Logging.AddSerilog(logger);
-builder.Host.UseSerilog(logger);
+// var logger = new LoggerConfiguration()
+//     // .WriteTo.Console(LogEventLevel.Information)
+//     .ReadFrom.Configuration(builder.Configuration)
+//     .Enrich.FromLogContext()
+//     .CreateLogger();
+// Log.Logger = logger;
+// builder.Logging.ClearProviders();
+// builder.Logging.AddSerilog(logger);
+// builder.Host.UseSerilog(logger);
 
 builder.Services.AddSqlServer<ApplicationDbContext>(
     builder.Configuration["Database:ConnectionString"]!);
