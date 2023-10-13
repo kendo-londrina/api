@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using w_escolas.Endpoints.Alunos;
 using w_escolas.Endpoints.Cursos;
 using w_escolas.Endpoints.Escolas;
@@ -19,6 +20,16 @@ using w_escolas.Infra.SendGrid;
 using w_escolas.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var logger = new LoggerConfiguration()
+    // .WriteTo.Console(LogEventLevel.Information)
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+Log.Logger = logger;
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
+builder.Host.UseSerilog(logger);
 
 builder.Services.AddSqlServer<ApplicationDbContext>(
     builder.Configuration["Database:ConnectionString"]!);
