@@ -3,6 +3,4 @@
 **/bin
 **/TestResults
 src/appsettings.json
-src/appsettings.Staging.json
-src/appsettings.Development.json
 test/.vscode
