@@ -2,5 +2,5 @@
 **/obj
 **/bin
 **/TestResults
-src/appsettings.Development.json
+src/appsettings.json
 test/.vscode
