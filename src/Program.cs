@@ -22,7 +22,7 @@ using w_escolas.Shared;
 var builder = WebApplication.CreateBuilder(args);
 
 var logger = new LoggerConfiguration()
-    // .WriteTo.Console(LogEventLevel.Information)
+    .WriteTo.Console(Serilog.Events.LogEventLevel.Information)
     .ReadFrom.Configuration(builder.Configuration)
     .Enrich.FromLogContext()
     .CreateLogger();

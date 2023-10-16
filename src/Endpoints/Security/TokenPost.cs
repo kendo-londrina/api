@@ -14,13 +14,17 @@ public class TokenPost
     public static string Template => "/token";
     public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
     public static Delegate Handle => ActionAsync;
+    private static ILogger<TokenPost>? _logger;
 
     [AllowAnonymous]
     public static async Task<IResult> ActionAsync(
+        ILogger<TokenPost> logger,
         LoginRequest loginRequest,
         UserManager<IdentityUser> userManager,
         IConfiguration configuration)
     {
+        _logger = logger;
+        _logger.LogInformation($"{loginRequest.Email} logando ...");
         var user = await userManager.FindByEmailAsync(loginRequest.Email);
         if (user == null)
             return Results.BadRequest("problema na autenticação/confirmação da conta");
@@ -51,6 +55,8 @@ public class TokenPost
         };
         var tokenHandler = new JwtSecurityTokenHandler();
         var token = tokenHandler.CreateToken(tokenDescriptor);
+        _logger.LogInformation($"{loginRequest.Email} logou.");
+
         return Results.Ok(new
         {
             token = tokenHandler.WriteToken(token)
