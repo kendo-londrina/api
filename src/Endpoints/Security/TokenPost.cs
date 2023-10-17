@@ -27,14 +27,14 @@ public class TokenPost
         _logger.LogInformation($"{loginRequest.Email} logando ...");
         var user = await userManager.FindByEmailAsync(loginRequest.Email);
         if (user == null)
-            return Results.BadRequest("problema na autenticação/confirmação da conta");
+            return Results.Unauthorized();
 
         if (!user.EmailConfirmed)
-            return Results.BadRequest("problema na autenticação/confirmação da conta");
+            return Results.Unauthorized();
 
         var passwordCheck = await userManager.CheckPasswordAsync(user, loginRequest.Password);
         if (!passwordCheck)
-            return Results.BadRequest("problema na autenticação/confirmação da conta");
+            return Results.Unauthorized();
 
         var claims = await userManager.GetClaimsAsync(user);
         var escolaId = claims.FirstOrDefault((claim) => claim.Type == "EscolaId")!.Value;
