@@ -1,5 +1,4 @@
-﻿using System.Runtime.Intrinsics.Arm;
-using w_escolas.Domain._abstractClasses;
+﻿using w_escolas.Domain._abstractClasses;
 using w_escolas.Domain.Cursos;
 using w_escolas.Domain.Escolas;
 using w_escolas.Domain.Matriculas;

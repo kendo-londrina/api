@@ -1,3 +1,5 @@
+using ken_lo.Domain.Familias;
+using ken_lo.Infra.Data.Config;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +24,7 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     public DbSet<Endereco>? Enderecos { get; set; }
     public DbSet<Temporada>? Temporadas { get; set; }
     public DbSet<Matricula>? Matriculas { get; set; }
+    public DbSet<Familia>? Familias { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
@@ -37,6 +40,7 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
         builder.ApplyConfiguration(new EnderecoConfig());
         builder.ApplyConfiguration(new TemporadaConfig());
         builder.ApplyConfiguration(new MatriculaConfig());
+        builder.ApplyConfiguration(new FamiliaConfig());
     }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configuration)
