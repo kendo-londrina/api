@@ -163,9 +163,9 @@ app.MapMethods(MatriculasDoCursoGet.Template, MatriculasDoCursoGet.Methods, Matr
 app.MapMethods(MatriculasDaTemporadaGet.Template, MatriculasDaTemporadaGet.Methods, MatriculasDaTemporadaGet.Handle);
 
 app.MapMethods(FamiliaPost.Template, FamiliaPost.Methods, FamiliaPost.Handle);
-// app.MapMethods(FamiliaGet.Template, FamiliaGet.Methods, FamiliaGet.Handle);
-// app.MapMethods(FamiliaDelete.Template, FamiliaDelete.Methods, FamiliaDelete.Handle);
-// app.MapMethods(FamiliaPut.Template, FamiliaPut.Methods, FamiliaPut.Handle);
+app.MapMethods(FamiliaGet.Template, FamiliaGet.Methods, FamiliaGet.Handle);
+app.MapMethods(FamiliaDelete.Template, FamiliaDelete.Methods, FamiliaDelete.Handle);
+app.MapMethods(FamiliaPut.Template, FamiliaPut.Methods, FamiliaPut.Handle);
 
 app.Run();
 

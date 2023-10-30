@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using w_escolas.Endpoints;
-using w_escolas.Infra.Data;
 using w_escolas.Shared;
 
 namespace ken_lo.Endpoints.Familias;
