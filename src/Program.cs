@@ -1,4 +1,5 @@
 using System.Text;
+using ken_lo.Endpoints.Familias;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -160,6 +161,11 @@ app.MapMethods(MatriculaAlterarData.Template, MatriculaAlterarData.Methods, Matr
 app.MapMethods(MatriculasDoAlunoGet.Template, MatriculasDoAlunoGet.Methods, MatriculasDoAlunoGet.Handle);
 app.MapMethods(MatriculasDoCursoGet.Template, MatriculasDoCursoGet.Methods, MatriculasDoCursoGet.Handle);
 app.MapMethods(MatriculasDaTemporadaGet.Template, MatriculasDaTemporadaGet.Methods, MatriculasDaTemporadaGet.Handle);
+
+app.MapMethods(FamiliaPost.Template, FamiliaPost.Methods, FamiliaPost.Handle);
+// app.MapMethods(FamiliaGet.Template, FamiliaGet.Methods, FamiliaGet.Handle);
+// app.MapMethods(FamiliaDelete.Template, FamiliaDelete.Methods, FamiliaDelete.Handle);
+// app.MapMethods(FamiliaPut.Template, FamiliaPut.Methods, FamiliaPut.Handle);
 
 app.Run();
 
