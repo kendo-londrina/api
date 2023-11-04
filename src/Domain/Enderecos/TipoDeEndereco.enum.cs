@@ -1,4 +1,4 @@
-public enum TipoDeEnderecoEnum
+public enum TipoDeEndereco
 {
     Residencial,
     Comercial

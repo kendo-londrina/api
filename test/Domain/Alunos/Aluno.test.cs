@@ -138,7 +138,7 @@ public class AlunoTest
             faker.Address.County(),
             faker.Address.SecondaryAddress(),
             faker.Address.FullAddress(),
-            faker.Random.EnumValues<TipoDeEnderecoEnum>().ToString()
+            faker.Random.EnumValues<TipoDeEndereco>().ToString()
         );
 
         aluno.AlterarEndereco(endereco);
