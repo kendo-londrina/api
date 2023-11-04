@@ -16,11 +16,11 @@ public class SendGridEmailSender : IEmailSender
     }
     //public SendGridAuth Options { get; }
     private readonly IConfiguration configuration;
-    public Task SendEmailAsync(string email, string subject, string message)
+    public Task SendEmailAsync(string email, string subject, string htmlMessage)
     {
         //return Execute(Options.SendGridKey, subject, message, email);
         var sendGridKey = configuration["SENDGRID_API_KEY"];
-        return Execute(sendGridKey!, subject, message, email);
+        return Execute(sendGridKey!, subject, htmlMessage, email);
     }
     public Task Execute(string apiKey, string subject, string message, string email)
     {

@@ -43,9 +43,9 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
         builder.ApplyConfiguration(new FamiliaConfig());
     }
 
-    protected override void ConfigureConventions(ModelConfigurationBuilder configuration)
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
-        configuration.Properties<string>()
+        configurationBuilder.Properties<string>()
             .HaveMaxLength(100)
             .HaveColumnType("varchar");
     }
