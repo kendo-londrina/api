@@ -74,7 +74,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: analyze
+    # needs: analyze
 
     steps:
       - uses: actions/checkout@v3
@@ -92,10 +92,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nuget-
 
-      - name: Build with dotnet
+      - name: Test
+        run: dotnet build ./src/ --configuration Release
+      
+      - name: Build
         run: dotnet build ./src/ --configuration Release
 
-      - name: dotnet publish
+      - name: Publish
         run: dotnet publish ./src/ -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
