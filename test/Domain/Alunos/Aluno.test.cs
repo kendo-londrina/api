@@ -108,7 +108,7 @@ public class AlunoTest
 
         aluno.Should().NotBeNull();
         aluno.Nome.Should().Be(nomeAlterado);
-        aluno.Codigo.Should().Be(codigoAlterado);
+        aluno.Codigo.Should().Be("codigoAlterado");
         aluno.DataNascimento.Should().Be(dataNascimentoAlterado);
         aluno.Nacionalidade.Should().Be(nacionalidadeAlterado);
         aluno.UfNascimento.Should().Be(ufNascimentoAlterado);
