@@ -1,5 +1,6 @@
 ﻿using ken_lo.Domain.Familias;
 using ken_lo.Endpoints.Familias.dtos;
+using Microsoft.EntityFrameworkCore;
 using w_escolas.Shared;
 
 namespace ken_lo.Endpoints.Familias;
@@ -13,14 +14,34 @@ public class FamiliaGet
     public static IResult Action(
         FamiliaFilter? filter,
         ApplicationDbContext context,
-        UserInfo userInfo)
+        UserInfo userInfo,
+        int page = 1, int rowsPerPage = 10, string orderBy = "Nome", string sortOrder = "asc")
     {
         if (context.Familias == null)
             return Results.UnprocessableEntity();
 
+        if (rowsPerPage > 100)
+            return Results.Problem(title: "Max rowsPerPage value must be 100", statusCode: 400);
+
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
-        var familias = Get(context, filter!, escolaIdDoUsuarioCorrente);
+        var queryBase = context.Familias.AsNoTracking()
+            .Where(t => t.EscolaId == escolaIdDoUsuarioCorrente);
+        IQueryable<Familia> queryOrder = orderBy.ToLower() switch
+        {
+            "id" => (sortOrder == "asc")
+                ? queryBase.OrderBy(t => t.Id)
+                : queryBase.OrderByDescending(t => t.Id),
+            _ => (sortOrder == "asc")
+                ? queryBase.OrderBy(t => t.Nome)
+                : queryBase.OrderByDescending(t => t.Nome),
+        };
+
+        var queryFiltered = ApplyFilter(queryOrder, filter);
+
+        var queryPaginated = queryFiltered.Skip((page - 1) * rowsPerPage).Take(rowsPerPage);
+
+        var familias = queryPaginated.ToList();
 
         var response = familias.Select(
             t => new FamiliaResponse
@@ -30,39 +51,22 @@ public class FamiliaGet
             }
         );
 
-        return Results.Ok(response);
+        if (filter != null && filter.Id != null && filter.Id != "")
+            return Results.Ok(response);
+
+        var pageDto = new PageDto<Familia> { Count = queryFiltered.ToList().Count, Data = familias };
+        return Results.Ok(pageDto);        
     }
 
-    private static List<Familia> Get(
-        ApplicationDbContext context, FamiliaFilter filter, Guid escolaId)
+    private static IQueryable<Familia> ApplyFilter(IQueryable<Familia> inputQuery, FamiliaFilter? filter)
     {
         if (filter == null)
-            return ObterTodos(context, escolaId);
-
+            return inputQuery;
         if (filter.Id != null && filter.Id != "")
-            return ObterPorId(context, filter.Id);
-
+            return inputQuery.Where(t => t.Id.ToString() == filter.Id);
         if (filter.Nome != null && filter.Nome != "")
-            return ObterPorNome(context, filter.Nome, escolaId);
-
-        return ObterTodos(context, escolaId);
-    }
-
-    private static List<Familia> ObterTodos(ApplicationDbContext context, Guid escolaId)
-    {
-        return context.Familias!
-            .Where(t => t.EscolaId == escolaId)
-            .OrderBy(t => t.Nome).ToList();
-    }
-    private static List<Familia> ObterPorId(ApplicationDbContext context, string familiaId)
-    {
-        return context.Familias!
-            .Where(t => t.Id.ToString() == familiaId).ToList();
-    }
-    private static List<Familia> ObterPorNome(ApplicationDbContext context, string nome, Guid escolaId)
-    {
-        return context.Familias!
-            .Where(t => t.EscolaId == escolaId && t.Nome.Contains(nome) )
-            .OrderBy(t => t.Nome).ToList();
+            return inputQuery.Where(t => 
+                t.Nome.Contains(filter.Nome));
+        return inputQuery;
     }
 }
