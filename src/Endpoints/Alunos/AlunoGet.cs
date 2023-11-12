@@ -15,13 +15,13 @@ public class AlunoGet
         AlunoFilter? filter,
         ApplicationDbContext context,
         UserInfo userInfo,
-        int page = 1, int row = 10, string orderBy = "Nome", string sortOrder = "asc")
+        int page = 1, int rowsPerPage = 10, string orderBy = "Nome", string sortOrder = "asc")
     {
         if (context.Alunos == null)
             return Results.UnprocessableEntity();
         
-        if (row > 100)
-            return Results.Problem(title: "Max row value must be 100", statusCode: 400);
+        if (rowsPerPage > 100)
+            return Results.Problem(title: "Max rowsPerPage value must be 100", statusCode: 400);
 
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
@@ -41,7 +41,7 @@ public class AlunoGet
         };
         var queryFiltered = ApplyFilter(queryOrder, filter);
 
-        var queryPaginated = queryFiltered.Skip((page - 1) * row).Take(row);
+        var queryPaginated = queryFiltered.Skip((page - 1) * rowsPerPage).Take(rowsPerPage);
 
         var alunos = queryPaginated.ToList();
 
