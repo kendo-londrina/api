@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using w_escolas.Domain.Alunos;
 using w_escolas.Endpoints.Alunos.dtos;
-using w_escolas.Infra.Data;
 using w_escolas.Shared;
 
 namespace w_escolas.Endpoints.Alunos;
@@ -85,53 +84,4 @@ public class AlunoGet
                 t.Nome!.Contains(filter.CodigoOuNome));
         return inputQuery;
     }
-
-    //private static List<Aluno> GetByFilter(ApplicationDbContext context, AlunoFilter filter, Guid escolaId)
-    //{
-    //    if (filter == null)
-    //        return GetAll(context, escolaId);
-
-    //    if (filter.Id != null && filter.Id != "")
-    //        return GetById(context, filter.Id);
-
-    //    //if (filter.CursoId != null && filter.CursoId != "")
-    //    //    return GetByCurso(context, filter.CursoId);
-
-    //    if (filter.CodigoOuNome != null)
-    //        return GetByCodigoOuNome(context, filter.CodigoOuNome!, escolaId);
-
-    //    return GetAll(context, escolaId);
-    //}
-
-    //private static List<Aluno> GetAll(ApplicationDbContext context, Guid escolaId)
-    //{
-    //    var ret = context.Alunos
-    //        .Where(t => t.EscolaId == escolaId)
-    //        .OrderBy(t => t.Nome).ToList();
-    //    return ret;
-    //}
-
-    //private static List<Aluno> GetById(ApplicationDbContext context, string alunoId)
-    //{
-    //    return context.Alunos
-    //        .Where(t => t.Id.ToString() == alunoId).ToList();
-    //}
-
-    //private static List<Aluno> GetByCurso(ApplicationDbContext context, string cursoId)
-    //{
-    //    return context.Alunos
-    //        .Include(t => t.TipoDeCurso)
-    //        .Where(t => t.TipoDeCursoId.ToString() == tipoDeCursoId)
-    //        .OrderBy(t => t.TipoDeCurso!.Ordem).ThenBy(t => t.Ordem).ToList();
-    //}
-
-    //private static List<Aluno> GetByCodigoOuNome(ApplicationDbContext context, string codigoOuNome, Guid escolaId)
-    //{
-    //    var ret = context.Alunos
-    //        .Where(t => t.EscolaId == escolaId &&
-    //            (t.Codigo!.Contains(codigoOuNome) || t.Nome!.Contains(codigoOuNome)))
-    //        .OrderBy(t => t.Nome).ToList();
-    //    return ret;
-    //}
-
 }
