@@ -1,5 +1,6 @@
 using Bogus;
 using FluentAssertions;
+using ken_lo.Domain.Enderecos;
 using w_escolas.Domain.Enderecos;
 
 namespace w_escolas.Domain.Alunos;
@@ -138,7 +139,7 @@ public class AlunoTest
             faker.Address.County(),
             faker.Address.SecondaryAddress(),
             faker.Address.FullAddress(),
-            faker.Random.EnumValues<TipoDeEnderecoEnum>().ToString()
+            faker.Random.EnumValues<TipoDeEndereco>().ToString()
         );
 
         aluno.AlterarEndereco(endereco);

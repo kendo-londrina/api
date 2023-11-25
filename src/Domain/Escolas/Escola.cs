@@ -30,12 +30,6 @@ public class Escola : Entity
     virtual public IEnumerable<Temporada>? Temporadas { get; private set; }
     virtual public IEnumerable<Matricula>? Matriculas { get; private set; }
 
-    public Escola(string nomeFantasia, string uf, string cidade)
-    {
-        NomeFantasia = nomeFantasia;
-        Uf = uf;
-        Cidade = cidade;
-    }
     public Escola(string nomeFantasia, string uf, string cidade,
         [Optional] string cnpj,
         [Optional] string razaoSocial,
