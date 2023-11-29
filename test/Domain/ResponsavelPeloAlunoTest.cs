@@ -1,4 +1,3 @@
-using Bogus;
 using FluentAssertions;
 
 namespace ken_lo.Domain;

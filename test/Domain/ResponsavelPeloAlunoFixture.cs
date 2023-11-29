@@ -1,24 +1,24 @@
 using Bogus;
+using ken_lo.Common;
 
 namespace ken_lo.Domain;
-public class ResponsavelPeloAlunoFixture
+public class ResponsavelPeloAlunoFixture : BaseFixture
 {
     public ResponsavelPeloAluno GetValidObject()
     {
-        var faker = new Faker("pt_BR");
         return new ResponsavelPeloAluno(
             Guid.NewGuid(),
-            faker.Person.FullName,
-            faker.Date.Past(),
-            faker.Address.Country(),
-            faker.Address.StateAbbr(),
-            faker.Address.City(),
-            faker.Person.Gender.ToString(),
-            faker.Random.AlphaNumeric(15),
-            faker.Random.AlphaNumeric(11),
-            faker.Internet.Email(),
-            faker.Phone.PhoneNumber(),
-            faker.Name.FullName()
+            Faker.Person.FullName,
+            Faker.Date.Past(),
+            Faker.Address.Country(),
+            Faker.Address.StateAbbr(),
+            Faker.Address.City(),
+            Faker.Person.Gender.ToString(),
+            Faker.Random.AlphaNumeric(15),
+            Faker.Random.AlphaNumeric(11),
+            Faker.Internet.Email(),
+            Faker.Phone.PhoneNumber(),
+            Faker.Name.FullName()
         );
     }
 }
