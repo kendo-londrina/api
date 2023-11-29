@@ -1,4 +1,4 @@
-﻿namespace w_escolas.Domain._abstractClasses;
+﻿namespace ken_lo.Domain._abstractClasses;
 
 public abstract class Pessoa: Entity
 {
@@ -14,12 +14,12 @@ public abstract class Pessoa: Entity
     public string? TelCelular { get; protected set; }
     public string? Religiao { get; protected set; }
 
-    public Pessoa(string nome)
+    protected Pessoa(string nome)
     {
         this.Nome = nome;
     }
 
-    public Pessoa(string nome,
+    protected Pessoa(string nome,
         DateTime? dataNascimento,
         string? nacionalidade,
         string? ufNascimento,
