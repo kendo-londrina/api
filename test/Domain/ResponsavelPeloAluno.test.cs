@@ -1,9 +1,7 @@
 using Bogus;
 using FluentAssertions;
-using ken_lo.Domain;
-using ken_lo.Domain.Alunos;
 
-namespace len_lo.Domain.Alunos;
+namespace ken_lo.Domain;
 
 public class ResponsavelPeloAlunoTest
 {

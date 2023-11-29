@@ -2,7 +2,7 @@ using w_escolas.Domain._abstractClasses;
 using w_escolas.Domain.Enderecos;
 using w_escolas.Domain.Escolas;
 
-namespace ken_lo.Domain.Alunos;
+namespace ken_lo.Domain;
 
 public class ResponsavelPeloAluno : Pessoa
 {
