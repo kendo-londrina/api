@@ -6,7 +6,7 @@ namespace ken_lo.Domain;
 public class ResponsavelPeloAlunoTest
 {
     [Fact()]
-    public void InstanciarObjetoCompleto()
+    public void ObjetoInstanciar()
     {
         var faker = new Faker("pt_BR");
 
@@ -79,6 +79,71 @@ public class ResponsavelPeloAlunoTest
         );
         var exception = Assert.Throws<EntityValidationException>(action);
         Assert.Equal("Cpf não pode ser nulo ou vazio", exception.Message);
+    }
+
+    [Fact()]
+    public void ObjetoAlterar()
+    {
+        var faker = new Faker("pt_BR");
+
+        var escolaId = Guid.NewGuid();
+        var nome = faker.Person.FullName;
+        var dataNascimento = faker.Date.Past();
+        var nacionalidade = faker.Address.Country();
+        var ufNascimento = faker.Address.StateAbbr();
+        var cidadeNascimento = faker.Address.City();
+        var sexo = faker.Person.Gender.ToString();
+        var rg = faker.Random.AlphaNumeric(15);
+        var cpf = faker.Random.AlphaNumeric(11);
+        var email = faker.Internet.Email();
+        var telCelular = faker.Phone.PhoneNumber();
+        var religiao = faker.Name.FullName();
+
+        var responsavel = new ResponsavelPeloAluno(
+            escolaId, nome,
+            dataNascimento, nacionalidade, ufNascimento, cidadeNascimento,
+            sexo, rg, cpf, email, telCelular, religiao
+        );
+
+        var dadosAlterados = new {
+            Nome = faker.Person.FullName,
+            DataNascimento = faker.Date.Past(),
+            Nacionalidade = faker.Address.Country(),
+            UfNascimento = faker.Address.StateAbbr(),
+            CidadeNascimento = faker.Address.City(),
+            Sexo = faker.Person.Gender.ToString(),
+            Rg = faker.Random.AlphaNumeric(15),
+            Cpf = faker.Random.AlphaNumeric(11),
+            Email = faker.Internet.Email(),
+            TelCelular = faker.Phone.PhoneNumber(),
+            Religiao = faker.Name.FullName(),
+        };
+
+        responsavel.Alterar(
+            dadosAlterados.Nome,
+            dadosAlterados.DataNascimento,
+            dadosAlterados.Nacionalidade,
+            dadosAlterados.UfNascimento,
+            dadosAlterados.CidadeNascimento,
+            dadosAlterados.Sexo,
+            dadosAlterados.Rg,
+            dadosAlterados.Cpf,
+            dadosAlterados.Email,
+            dadosAlterados.TelCelular,
+            dadosAlterados.Religiao
+        );
+
+        Assert.Equal(responsavel.Nome, dadosAlterados.Nome);
+        Assert.Equal(responsavel.DataNascimento, dadosAlterados.DataNascimento);
+        Assert.Equal(responsavel.Nacionalidade, dadosAlterados.Nacionalidade);
+        Assert.Equal(responsavel.UfNascimento, dadosAlterados.UfNascimento);
+        Assert.Equal(responsavel.CidadeNascimento, dadosAlterados.CidadeNascimento);
+        Assert.Equal(responsavel.Sexo, dadosAlterados.Sexo);
+        Assert.Equal(responsavel.Rg, dadosAlterados.Rg);
+        Assert.Equal(responsavel.Cpf, dadosAlterados.Cpf);
+        Assert.Equal(responsavel.Email, dadosAlterados.Email);
+        Assert.Equal(responsavel.TelCelular, dadosAlterados.TelCelular);
+        Assert.Equal(responsavel.Religiao, dadosAlterados.Religiao);
     }
 
 }
