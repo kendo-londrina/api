@@ -1,38 +1,19 @@
 using Bogus;
 using FluentAssertions;
+using ken_lo.Domain;
+using ken_lo.Domain.Alunos;
 
-namespace w_escolas.Domain.Alunos;
+namespace len_lo.Domain.Alunos;
 
 public class ResponsavelPeloAlunoTest
 {
-    [Fact()]
-    public void InstanciarObjetoSimples()
-    {
-        var faker = new Faker("pt_BR");
-
-        var escolaId = new Guid();
-        var alunoId = new Guid();
-        var nome = faker.Person.FullName;
-
-        var aluno = new ResponsavelPeloAluno(
-            escolaId, alunoId, nome
-        );
-
-        aluno.Should().NotBeNull();
-        aluno.EscolaId.Should().Be(escolaId);
-        aluno.AlunoId.Should().Be(alunoId);
-        aluno.Nome.Should().Be(nome);
-    }
-
     [Fact()]
     public void InstanciarObjetoCompleto()
     {
         var faker = new Faker("pt_BR");
 
-        var escolaId = new Guid();
-        var alunoId = new Guid();
+        var escolaId = Guid.NewGuid();
         var nome = faker.Person.FullName;
-        var codigo = faker.Random.AlphaNumeric(10);
         var dataNascimento = faker.Date.Past();
         var nacionalidade = faker.Address.Country();
         var ufNascimento = faker.Address.StateAbbr();
@@ -45,7 +26,7 @@ public class ResponsavelPeloAlunoTest
         var religiao = faker.Name.FullName();
 
         var responsavelPeloAluno = new ResponsavelPeloAluno(
-            escolaId, alunoId, nome,
+            escolaId, nome,
             dataNascimento, nacionalidade, ufNascimento, cidadeNascimento,
             sexo, rg, cpf, email, telCelular, religiao
         );
@@ -64,4 +45,42 @@ public class ResponsavelPeloAlunoTest
         responsavelPeloAluno.TelCelular.Should().Be(telCelular);
         responsavelPeloAluno.Religiao.Should().Be(religiao);
     }
+
+    [Theory()]
+    [InlineData("")]
+    [InlineData(null)]
+    [InlineData("  ")]
+    public void NomeNaoNuloOuVazio(string? nome)
+    {
+        var escolaId = Guid.NewGuid();
+
+        Action action = () => new ResponsavelPeloAluno(
+            escolaId, nome!,
+            null, null, null, null,
+            null, null, null, null, null, null
+        );
+        var exception = Assert.Throws<EntityValidationException>(action);
+        Assert.Equal("Nome não pode ser nulo ou vazio", exception.Message);
+    }
+
+    [Theory()]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("  ")]
+    public void CPFNaoNuloOuVazio(string? cpf)
+    {
+        var faker = new Faker("pt_BR");
+
+        var escolaId = Guid.NewGuid();
+        var nome = faker.Person.FullName;
+
+        Action action = () => new ResponsavelPeloAluno(
+            escolaId, nome,
+            null, null, null, null,
+            null, null, cpf, null, null, null
+        );
+        var exception = Assert.Throws<EntityValidationException>(action);
+        Assert.Equal("Cpf não pode ser nulo ou vazio", exception.Message);
+    }
+
 }

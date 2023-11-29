@@ -2,27 +2,16 @@ using w_escolas.Domain._abstractClasses;
 using w_escolas.Domain.Enderecos;
 using w_escolas.Domain.Escolas;
 
-namespace w_escolas.Domain.Alunos;
+namespace ken_lo.Domain.Alunos;
 
 public class ResponsavelPeloAluno : Pessoa
 {
     public Guid EscolaId { get; private set; }
     virtual public Escola? Escola { get; private set; }
-    public Guid AlunoId { get; private set; }
-    virtual public Aluno? Aluno { get; private set; }
     public Guid? EnderecoId { get; private set; }
     virtual public Endereco? Endereco { get; private set; }
 
     public ResponsavelPeloAluno(Guid escolaId,
-        Guid alunoId,
-        string nome) : base(nome)
-    {
-        this.EscolaId = escolaId;
-        this.AlunoId = alunoId;
-    }
-
-    public ResponsavelPeloAluno(Guid escolaId,
-        Guid alunoId,
         string nome,
         DateTime? dataNascimento,
         string? nacionalidade,
@@ -38,6 +27,15 @@ public class ResponsavelPeloAluno : Pessoa
             sexo, rg, cpf, email, telCelular, religiao)
     {
         this.EscolaId = escolaId;
-        this.AlunoId = alunoId;
+
+        Validate();
+    }
+
+    public void Validate()
+    {
+        if (String.IsNullOrWhiteSpace(Nome))
+            throw new EntityValidationException($"{nameof(Nome)} não pode ser nulo ou vazio");
+        if (String.IsNullOrWhiteSpace(Cpf))
+            throw new EntityValidationException($"{nameof(Cpf)} não pode ser nulo ou vazio");
     }
 }
