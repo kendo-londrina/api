@@ -1,4 +1,5 @@
 using ken_lo.Domain._abstractClasses;
+using ken_lo.Domain.Validation;
 using w_escolas.Domain.Enderecos;
 using w_escolas.Domain.Escolas;
 
@@ -60,10 +61,8 @@ public class ResponsavelPeloAluno : Pessoa
 
     public void Validate()
     {
-        if (String.IsNullOrWhiteSpace(Nome))
-            throw new EntityValidationException($"{nameof(Nome)} não pode ser nulo ou vazio");
-        if (String.IsNullOrWhiteSpace(Cpf))
-            throw new EntityValidationException($"{nameof(Cpf)} não pode ser nulo ou vazio");
+        DomainValidation.NotNullOrEmpty(Nome, nameof(Nome));
+        DomainValidation.NotNullOrEmpty(Cpf, nameof(Cpf));
         // validar:
         // - CPF válido
         // - Nome deve ser no mínimo: nome + sobrenome

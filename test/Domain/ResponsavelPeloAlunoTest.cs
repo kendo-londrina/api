@@ -45,8 +45,8 @@ public class ResponsavelPeloAlunoTest
     }
 
     [Theory()]
-    [InlineData("")]
     [InlineData(null)]
+    [InlineData("")]
     [InlineData("  ")]
     public void NomeNaoNuloOuVazio(string? nome)
     {
