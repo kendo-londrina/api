@@ -1,4 +1,4 @@
-namespace ken_lo.Domain;
+namespace ken_lo.Domain.Validation;
 
 public class EntityValidationException: Exception
 {

@@ -1,4 +1,5 @@
 using FluentAssertions;
+using ken_lo.Domain.Validation;
 
 namespace ken_lo.Domain;
 
