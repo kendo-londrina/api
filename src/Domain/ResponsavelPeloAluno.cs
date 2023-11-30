@@ -1,30 +1,19 @@
-﻿using ken_lo.Domain._abstractClasses;
+using ken_lo.Domain._abstractClasses;
+using ken_lo.Domain.Validation;
 using w_escolas.Domain.Enderecos;
 using w_escolas.Domain.Escolas;
-using w_escolas.Domain.Matriculas;
 
-namespace w_escolas.Domain.Alunos;
+namespace ken_lo.Domain;
 
-public class Aluno : Pessoa
+public class ResponsavelPeloAluno : Pessoa
 {
     public Guid EscolaId { get; private set; }
     virtual public Escola? Escola { get; private set; }
-    public string? Codigo { get; private set; }
     public Guid? EnderecoId { get; private set; }
-
     virtual public Endereco? Endereco { get; private set; }
-    virtual public IEnumerable<Matricula>? Matriculas { get; private set; }
 
-    public Aluno(Guid escolaId, string nome, string codigo)
-        : base(nome)
-    {
-        this.EscolaId = escolaId;
-        this.Codigo = codigo;
-    }
-
-    public Aluno(Guid escolaId,
+    public ResponsavelPeloAluno(Guid escolaId,
         string nome,
-        string? codigo,
         DateTime? dataNascimento,
         string? nacionalidade,
         string? ufNascimento,
@@ -36,20 +25,15 @@ public class Aluno : Pessoa
         string? telCelular,
         string? religiao) : base(
             nome, dataNascimento, nacionalidade, ufNascimento, cidadeNascimento,
-            sexo, rg, cpf, email,telCelular, religiao)
+            sexo, rg, cpf, email, telCelular, religiao)
     {
         this.EscolaId = escolaId;
-        this.Codigo = codigo;
-    }
 
-    public void AlterarEndereco(Endereco endereco)
-    {
-        this.Endereco = endereco;
+        Validate();
     }
 
     public void Alterar(
         string nome,
-        string? codigo,
         DateTime? dataNascimento,
         string? nacionalidade,
         string? ufNascimento,
@@ -62,7 +46,6 @@ public class Aluno : Pessoa
         string? religiao)
     {
         this.Nome = nome;
-        this.Codigo = codigo;
         this.DataNascimento = dataNascimento;
         this.Nacionalidade = nacionalidade;
         this.UfNascimento = ufNascimento;
@@ -73,5 +56,20 @@ public class Aluno : Pessoa
         this.Email = email;
         this.TelCelular = telCelular;
         this.Religiao = religiao;
+        Validate();
+    }
+
+    public void Validate()
+    {
+        DomainValidation.NotNullOrEmpty(Nome, nameof(Nome));
+        DomainValidation.NotNullOrEmpty(Cpf, nameof(Cpf));
+        // validar:
+        // - CPF válido
+        // - Nome deve ser no mínimo: nome + sobrenome
+        //     nome e sobrenome(s) devem ter mais de 2 letras
+        // - Data de nascimento: responsável deve ser maior de 18
+        // - se informado email deve estar em formato válido email@dominio.suf
+        // - se informado celular deve estar em formato válido (99)9-9999-9999
+        // ...
     }
 }

@@ -1,14 +1,14 @@
-﻿namespace w_escolas.Domain._abstractClasses;
+﻿namespace ken_lo.Domain._abstractClasses;
 
 public abstract class Entity
 {
-    public Guid Id { get; private set; }
-    public string? CreatedBy { get; private set; }
-    public DateTime? CreatedOn { get; private set; }
-    public string? EditedBy { get; private set; }
-    public DateTime? EditedOn { get; private set; }
+    public Guid Id { get; protected set; }
+    public string? CreatedBy { get; protected set; }
+    public DateTime? CreatedOn { get; protected set; }
+    public string? EditedBy { get; protected set; }
+    public DateTime? EditedOn { get; protected set; }
 
-    public Entity()
+    protected Entity()
     {
         Id = Guid.NewGuid();
     }

@@ -1,4 +1,4 @@
-using w_escolas.Domain._abstractClasses;
+using ken_lo.Domain._abstractClasses;
 using w_escolas.Domain.Escolas;
 
 namespace ken_lo.Domain.Familias;

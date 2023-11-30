@@ -1,4 +1,4 @@
-﻿using w_escolas.Domain._abstractClasses;
+﻿using ken_lo.Domain._abstractClasses;
 
 namespace w_escolas.Domain.Enderecos;
 
