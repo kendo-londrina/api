@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-using w_escolas.Domain.Alunos;
+using ken_lo.Domain;
 using w_escolas.Domain.Cursos;
 using w_escolas.Domain.Enderecos;
 using w_escolas.Domain.Escolas;

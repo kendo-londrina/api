@@ -1,4 +1,4 @@
-﻿using w_escolas.Domain.Alunos;
+﻿using ken_lo.Domain;
 using w_escolas.Shared;
 
 namespace w_escolas.Endpoints.Alunos;

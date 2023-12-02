@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using w_escolas.Domain.Alunos;
+using ken_lo.Domain;
 using w_escolas.Domain.Escolas;
 using w_escolas.Domain.Matriculas;
 using w_escolas.Endpoints.Alunos.dtos;

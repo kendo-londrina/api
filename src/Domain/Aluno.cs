@@ -3,7 +3,7 @@ using w_escolas.Domain.Enderecos;
 using w_escolas.Domain.Escolas;
 using w_escolas.Domain.Matriculas;
 
-namespace w_escolas.Domain.Alunos;
+namespace ken_lo.Domain;
 
 public class Aluno : Pessoa
 {

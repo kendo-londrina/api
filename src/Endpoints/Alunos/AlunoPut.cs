@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using w_escolas.Domain.Alunos;
+using ken_lo.Domain;
 using w_escolas.Endpoints.Alunos.dtos;
 using w_escolas.Infra.Data;
 using w_escolas.Shared;
@@ -40,10 +40,10 @@ public class AlunoPut
             alunoRequest.TelCelular!.Trim(),
             alunoRequest.Religiao!.Trim()
         );
-        var validator = new AlunoValidator();
-        var validation = validator.Validate(aluno);
-        if (!validation.IsValid)
-            return Results.ValidationProblem(validation.Errors.ConvertToProblemDetails());
+        // var validator = new AlunoValidator();
+        // var validation = validator.Validate(aluno);
+        // if (!validation.IsValid)
+        //     return Results.ValidationProblem(validation.Errors.ConvertToProblemDetails());
 
         if (NaoPodeAlterar(context, aluno))
             return Results.ValidationProblem(errorMessages.ConvertToProblemDetails());
