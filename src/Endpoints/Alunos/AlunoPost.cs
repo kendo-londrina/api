@@ -1,10 +1,12 @@
 ﻿using ken_lo.Domain;
+using ken_lo.Domain.Validation;
+using w_escolas.Endpoints;
 using w_escolas.Endpoints.Alunos.dtos;
 using w_escolas.Shared;
 
-namespace w_escolas.Endpoints.Alunos;
+namespace ken_lo.Endpoints.Alunos;
 
-public class AlunoPost
+public static class AlunoPost
 {
     public static string Template => "/alunos";
     public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
@@ -19,7 +21,16 @@ public class AlunoPost
 
         var escolaIdDoUsuarioCorrente = userInfo.GetEscolaId();
 
-        var aluno = DtoToObj(escolaIdDoUsuarioCorrente, alunoRequest);
+        Aluno aluno;
+        try
+        {
+            aluno = DtoToObj(escolaIdDoUsuarioCorrente, alunoRequest);
+        }
+        catch (EntityValidationException ex)
+        {
+            errorMessages.Add(ex.Message);
+            return Results.ValidationProblem(errorMessages.ConvertToProblemDetails());
+        }
         // var validator = new AlunoValidator();
         // var validation = validator.Validate(aluno);
         // if (!validation.IsValid)
@@ -57,9 +68,10 @@ public class AlunoPost
     {
         if (aluno.Codigo is not null && aluno.Codigo != "")
         {
-            if (context.Alunos!.Where(t =>
+            var temAlunoComMesmoCodigo = context.Alunos!.Where(t =>
                 t.Codigo == aluno.Codigo &&
-                t.EscolaId == aluno.EscolaId).Any())
+                t.EscolaId == aluno.EscolaId).Any();
+            if (temAlunoComMesmoCodigo)
             {
                 errorMessages.Add($"Já existe Aluno com código {aluno.Codigo}.");
             }
@@ -70,7 +82,7 @@ public class AlunoPost
     {
         errorMessages.Clear();
         VerificarComMesmoCodigo(context, aluno);
-        //VerificarComMesmoNome(context, curso);
+        // Verificar também atleta com mesmo nome
         return errorMessages.Count > 0;
     }
 
