@@ -11,7 +11,7 @@ public class ResponsavelPeloAlunoTest
         => _responsavelPeloAlunoFixture = responsavelPeloAlunoFixture;
     
     [Fact()]
-    public void ObjetoInstanciar()
+    public void Instanciar()
     {
         var validData = _responsavelPeloAlunoFixture.GetValidObject();
 
@@ -100,7 +100,7 @@ public class ResponsavelPeloAlunoTest
     }
 
     [Fact()]
-    public void ObjetoAlterar()
+    public void Alterar()
     {
         var validData = _responsavelPeloAlunoFixture.GetValidObject();
         var responsavel = new ResponsavelPeloAluno(

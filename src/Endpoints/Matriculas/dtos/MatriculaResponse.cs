@@ -1,4 +1,4 @@
-﻿using w_escolas.Domain.Alunos;
+﻿using ken_lo.Domain;
 using w_escolas.Domain.Cursos;
 using w_escolas.Domain.Temporadas;
 

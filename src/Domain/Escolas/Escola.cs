@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using ken_lo.Domain._abstractClasses;
-using w_escolas.Domain.Alunos;
+using ken_lo.Domain;
 using w_escolas.Domain.Cursos;
 using w_escolas.Domain.Matriculas;
 using w_escolas.Domain.Temporadas;

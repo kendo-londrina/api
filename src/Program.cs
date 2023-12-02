@@ -1,4 +1,5 @@
 using System.Text;
+using ken_lo.Endpoints.Alunos;
 using ken_lo.Endpoints.Familias;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -6,7 +7,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
-using w_escolas.Endpoints.Alunos;
 using w_escolas.Endpoints.Cursos;
 using w_escolas.Endpoints.Escolas;
 using w_escolas.Endpoints.Matriculas;

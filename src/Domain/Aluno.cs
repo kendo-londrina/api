@@ -1,9 +1,10 @@
 ﻿using ken_lo.Domain._abstractClasses;
+using ken_lo.Domain.Validation;
 using w_escolas.Domain.Enderecos;
 using w_escolas.Domain.Escolas;
 using w_escolas.Domain.Matriculas;
 
-namespace w_escolas.Domain.Alunos;
+namespace ken_lo.Domain;
 
 public class Aluno : Pessoa
 {
@@ -14,13 +15,6 @@ public class Aluno : Pessoa
 
     virtual public Endereco? Endereco { get; private set; }
     virtual public IEnumerable<Matricula>? Matriculas { get; private set; }
-
-    public Aluno(Guid escolaId, string nome, string codigo)
-        : base(nome)
-    {
-        this.EscolaId = escolaId;
-        this.Codigo = codigo;
-    }
 
     public Aluno(Guid escolaId,
         string nome,
@@ -38,13 +32,9 @@ public class Aluno : Pessoa
             nome, dataNascimento, nacionalidade, ufNascimento, cidadeNascimento,
             sexo, rg, cpf, email,telCelular, religiao)
     {
-        this.EscolaId = escolaId;
-        this.Codigo = codigo;
-    }
-
-    public void AlterarEndereco(Endereco endereco)
-    {
-        this.Endereco = endereco;
+        EscolaId = escolaId;
+        Codigo = codigo;
+        Validate();
     }
 
     public void Alterar(
@@ -61,17 +51,36 @@ public class Aluno : Pessoa
         string? telCelular,
         string? religiao)
     {
-        this.Nome = nome;
-        this.Codigo = codigo;
-        this.DataNascimento = dataNascimento;
-        this.Nacionalidade = nacionalidade;
-        this.UfNascimento = ufNascimento;
-        this.CidadeNascimento = cidadeNascimento;
-        this.Sexo = sexo;
-        this.Rg = rg;
-        this.Cpf = cpf;
-        this.Email = email;
-        this.TelCelular = telCelular;
-        this.Religiao = religiao;
+        Nome = nome;
+        Codigo = codigo;
+        DataNascimento = dataNascimento;
+        Nacionalidade = nacionalidade;
+        UfNascimento = ufNascimento;
+        CidadeNascimento = cidadeNascimento;
+        Sexo = sexo;
+        Rg = rg;
+        Cpf = cpf;
+        Email = email;
+        TelCelular = telCelular;
+        Religiao = religiao;
+        Validate();
     }
+
+    public void AlterarEndereco(Endereco endereco)
+    {
+        Endereco = endereco;
+    }
+
+    public void Validate()
+    {
+        DomainValidation.NotNullOrEmpty(Nome, nameof(Nome));
+        // validar:
+        // - Nome deve ser no mínimo: nome + sobrenome
+        //     nome e sobrenome(s) devem ter mais de 2 letras
+        // - Data de nascimento: o atleta deve ser maior de 5 anos
+        // - se informado Email deve estar em formato válido email@dominio.suf
+        // - se informado Celular deve estar em formato válido (99)9-9999-9999
+        // - se informado Cpf deve ser válido
+        // ...
+    }    
 }

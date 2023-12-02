@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using w_escolas.Endpoints;
 using w_escolas.Shared;
 
-namespace w_escolas.Endpoints.Alunos;
+namespace ken_lo.Endpoints.Alunos;
 
-public class AlunoDelete
+public static class AlunoDelete
 {
     public static string Template => "/alunos/{id:guid}";
     public static string[] Methods => new string[] { HttpMethod.Delete.ToString() };
