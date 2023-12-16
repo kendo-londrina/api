@@ -2,6 +2,7 @@ using Moq;
 using FluentAssertions;
 using ken_lo.Domain;
 using ken_lo.Application.UseCases;
+using ken_lo.Domain.Validation;
 
 namespace ken_lo.Application;
 
@@ -13,6 +14,42 @@ public class AlunoInsertTest
     {
         _alunoInsertFixture = alunoInsertFixture;
     }
+
+    [Theory()]
+    [MemberData(nameof(GetIvalidInputs))]
+    public async Task ErroAoInstanciarAgregado(
+        AlunoInsertInput input,
+        string exceptionMessage
+    )
+    {
+        var useCase = new AlunoInsert(
+            _alunoInsertFixture.getRepositoryMock().Object,
+            _alunoInsertFixture.getUnitOfWorkMock().Object
+        );
+
+        Func<Task> task = async () =>
+            await useCase.Handle(input, CancellationToken.None);
+
+        await task.Should()
+            .ThrowAsync<EntityValidationException>()
+            .WithMessage(exceptionMessage);
+    }
+
+    public static IEnumerable<object[]> GetIvalidInputs()
+    {
+        var fixture = new AlunoInsertFixture();
+        var invalidInputList = new List<object[]>();
+        var inputSemNome = fixture.GetInput();
+        inputSemNome.Nome = "";
+        invalidInputList.Add(
+            new object[] {
+                inputSemNome,
+                "Nome não pode ser nulo ou vazio"
+            }
+        );
+        return invalidInputList;
+    }
+
     [Fact()]
     public async Task InserirAluno() {
         // Arrange
