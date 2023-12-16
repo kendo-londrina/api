@@ -1,40 +1,28 @@
 using Moq;
-using Bogus;
-using Bogus.Extensions.Brazil;
 using FluentAssertions;
 using ken_lo.Domain;
-using ken_lo.Domain.Repository;
 using ken_lo.Application.UseCases;
 
 namespace ken_lo.Application;
+
+[Collection(nameof(AlunoInsertFixture))]
 public class AlunoInsertTest
 {
+    private readonly AlunoInsertFixture _alunoInsertFixture;
+    public AlunoInsertTest(AlunoInsertFixture alunoInsertFixture)
+    {
+        _alunoInsertFixture = alunoInsertFixture;
+    }
     [Fact()]
     public async Task InserirAluno() {
-        var Faker = new Faker("pt_BR");
-
         // Arrange
-        var repositoryMock = new Mock<IAlunoRepository>();
-        var unitOfWorkMock = new Mock<IUnitOfWork>();
+        var repositoryMock = _alunoInsertFixture.getRepositoryMock();
+        var unitOfWorkMock = _alunoInsertFixture.getUnitOfWorkMock();
         var useCase = new AlunoInsert(
             repositoryMock.Object,
             unitOfWorkMock.Object
         );
-        var input = new AlunoInsertInput(
-            Guid.NewGuid(),
-            Faker.Person.FullName,
-            Faker.Random.AlphaNumeric(5),
-            Faker.Date.Past(),
-            Faker.Address.Country(),
-            Faker.Address.StateAbbr(),
-            Faker.Address.City(),
-            Faker.Person.Gender.ToString(),
-            Faker.Random.AlphaNumeric(15),
-            Faker.Person.Cpf(),
-            Faker.Internet.Email(),
-            Faker.Phone.PhoneNumber(),
-            Faker.Random.Words(2)
-        );
+        var input = _alunoInsertFixture.GetInput();
 
         // Act
         var output = await useCase.Handle(input, CancellationToken.None);
