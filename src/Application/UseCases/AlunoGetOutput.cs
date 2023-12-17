@@ -50,7 +50,7 @@ public class AlunoGetOutput
         Religiao = religiao;
     }
 
-    public static AlunoGetOutput GetFromAluno(Aluno aluno)
+    public static AlunoGetOutput FromAluno(Aluno aluno)
     {
         return new AlunoGetOutput(
             aluno.Id,

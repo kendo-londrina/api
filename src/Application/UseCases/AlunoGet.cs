@@ -14,6 +14,6 @@ public class AlunoGet
         CancellationToken cancellationToken)
     {
         var aluno = await _alunoRepository.Get(input.Id, cancellationToken);
-        return AlunoGetOutput.GetFromAluno(aluno);
+        return AlunoGetOutput.FromAluno(aluno);
     }
 }
