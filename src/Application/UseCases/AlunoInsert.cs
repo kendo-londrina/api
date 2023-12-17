@@ -33,7 +33,7 @@ public class AlunoInsert
             input.TelCelular,
             input.Religiao
         );
-        await _alunoRepository.Inserir(aluno, cancellationToken);
+        await _alunoRepository.Insert(aluno, cancellationToken);
         await _unitOfWork.Commit(cancellationToken);
         return new AlunoInsertOutput(
             aluno.Id,

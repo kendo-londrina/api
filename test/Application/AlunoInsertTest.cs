@@ -66,7 +66,7 @@ public class AlunoInsertTest
 
         // Assertion
         repositoryMock.Verify(
-            repo => repo.Inserir(
+            repo => repo.Insert(
                 It.IsAny<Aluno>(),
                 It.IsAny<CancellationToken>()
             ),
