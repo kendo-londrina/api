@@ -1,6 +1,7 @@
 using Moq;
 using FluentAssertions;
 using ken_lo.Application.UseCases;
+using ken_lo.Application.Exceptions;
 
 namespace ken_lo.Application;
 
@@ -50,5 +51,34 @@ public class AlunoGetTest
         output.Email.Should().Be(exampleAluno.Email);
         output.TelCelular.Should().Be(exampleAluno.TelCelular);
         output.Religiao.Should().Be(exampleAluno.Religiao);
+    }
+
+    [Fact()]
+    public async Task NotFoundExceptionQuandoAlunoNaoExiste() {
+        // Arrange
+        var repositoryMock = _alunoGetFixture.getRepositoryMock();
+        var guidAleatorio = Guid.NewGuid();
+        repositoryMock.Setup(x => x.Get(
+            It.IsAny<Guid>(),
+            It.IsAny<CancellationToken>()
+        )).ThrowsAsync(
+            new NotFoundException($"Aluno '{guidAleatorio}' not found")
+        );
+        var input = new AlunoGetInput(guidAleatorio);
+        var useCase = new AlunoGet(repositoryMock.Object);
+
+        // Act
+        var task = async () => await useCase.Handle(input, CancellationToken.None);
+
+        // Assertion
+        await task.Should().ThrowAsync<NotFoundException>();
+
+        repositoryMock.Verify(
+            repo => repo.Get(
+                It.IsAny<Guid>(),
+                It.IsAny<CancellationToken>()
+            ),
+            Times.Once
+        );
     }
 }
