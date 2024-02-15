@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
+using ken_lo.Security;
 using System.Security.Claims;
 using System.Text;
 using w_escolas.Domain.Escolas;
@@ -18,7 +19,7 @@ public class EmailConfirmationPost
     [AllowAnonymous]
     public static async Task<IResult> Action(
         EmailConfirmationRequest confirmacaoDeEmail,
-        UserManager<IdentityUser> userManager,
+        UserManager<ApplicationUser> userManager,
         ApplicationDbContext context)
     {
         if (context.Escolas == null)

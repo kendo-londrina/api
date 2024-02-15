@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+using ken_lo.Security;
 
 namespace w_escolas.Endpoints.Usuarios;
 
@@ -11,6 +8,7 @@ public record LoginRequest(string Email, string Password);
 
 public class TokenPost
 {
+    protected TokenPost() { }
     public static string Template => "/token";
     public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
     public static Delegate Handle => ActionAsync;
@@ -20,7 +18,7 @@ public class TokenPost
     public static async Task<IResult> ActionAsync(
         ILogger<TokenPost> logger,
         LoginRequest loginRequest,
-        UserManager<IdentityUser> userManager,
+        UserManager<ApplicationUser> userManager,
         IConfiguration configuration)
     {
         _logger = logger;
@@ -37,29 +35,23 @@ public class TokenPost
             return Results.Unauthorized();
 
         var claims = await userManager.GetClaimsAsync(user);
-        var escolaId = claims.FirstOrDefault((claim) => claim.Type == "EscolaId")!.Value;
-
-        var key = Encoding.ASCII.GetBytes(configuration["JwtBearerTokenSettings:SecretKey"]!);
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(new Claim[]
-            {
-                new Claim(ClaimTypes.Email, loginRequest.Email),
-                new Claim("EscolaId", escolaId),
-            }),
-            SigningCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha256Signature),
-            Audience = configuration["JwtBearerTokenSettings:Audience"],
-            Issuer = configuration["JwtBearerTokenSettings:Issuer"]
-        };
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var token = tokenHandler.CreateToken(tokenDescriptor);
         _logger.LogInformation($"{loginRequest.Email} logou.");
+
+        var refreshToken = TokenGenerator.RefreshToken();
+        var accessToken = TokenGenerator.AccessToken(claims, loginRequest.Email, configuration);
+
+        _ = int.TryParse(configuration["JWT:RefreshTokenValidityInMinutes"],
+            out int refreshTokenValidityInMinutes);
+
+        user.RefreshToken = refreshToken;
+        user.RefreshTokenExpiryTime = DateTime.Now.AddMinutes(refreshTokenValidityInMinutes);
+
+        await userManager.UpdateAsync(user);
 
         return Results.Ok(new
         {
-            token = tokenHandler.WriteToken(token)
+            accessToken,
+            refreshToken
         });
     }
 }

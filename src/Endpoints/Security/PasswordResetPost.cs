@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.WebUtilities;
+using ken_lo.Security;
 using System.Text;
 
 namespace w_escolas.Endpoints.Security;
@@ -17,7 +18,7 @@ public class PasswordResetPost
     [AllowAnonymous]
     public static async Task<IResult> Action(
         PasswordResetDto passwordResetDto,
-        UserManager<IdentityUser> userManager,
+        UserManager<ApplicationUser> userManager,
         IEmailSender emailSender)
     {
         var user = await userManager.FindByIdAsync(passwordResetDto.UserId);
