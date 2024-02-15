@@ -35,10 +35,17 @@ public static class RefreshToken
         string userEmail = principal.Claims.ToList()[0].Value;
         var user = await userManager.FindByEmailAsync(userEmail);
 
-        if (user == null || user.RefreshToken != refreshToken ||
-                    user.RefreshTokenExpiryTime <= DateTime.Now)
+        if (user == null)
         {
             return Results.BadRequest("02-Invalid access token/refresh token");
+        }
+        if (user.RefreshToken != refreshToken)
+        {
+            return Results.BadRequest("03-Invalid access token/refresh token");
+        }
+        if (user.RefreshTokenExpiryTime <= DateTime.Now)
+        {
+            return Results.BadRequest("04-Invalid access token/refresh token");
         }
 
         var claims = await userManager.GetClaimsAsync(user);
