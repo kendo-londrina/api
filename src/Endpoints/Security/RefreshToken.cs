@@ -29,7 +29,7 @@ public static class RefreshToken
         var principal = GetPrincipalFromExpiredToken(accessToken, configuration);
         if (principal == null)
         {
-            return Results.BadRequest("Invalid access token/refresh token");
+            return Results.BadRequest("01-Invalid access token/refresh token");
         }
 
         string userEmail = principal.Claims.ToList()[0].Value;
@@ -38,7 +38,7 @@ public static class RefreshToken
         if (user == null || user.RefreshToken != refreshToken ||
                     user.RefreshTokenExpiryTime <= DateTime.Now)
         {
-            return Results.BadRequest("Invalid access token/refresh token");
+            return Results.BadRequest("02-Invalid access token/refresh token");
         }
 
         var claims = await userManager.GetClaimsAsync(user);
