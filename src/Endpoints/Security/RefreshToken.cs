@@ -5,6 +5,7 @@ using ken_lo.Security;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using ken_lo.Shared;
 
 namespace w_escolas.Endpoints.Security;
 
@@ -49,36 +50,19 @@ public static class RefreshToken
         }
 
         var claims = await userManager.GetClaimsAsync(user);
-        var escolaId = claims.FirstOrDefault((claim) => claim.Type == "EscolaId")!.Value;
-
-        var key = Encoding.ASCII.GetBytes(configuration["Jwt:SecretKey"]!);
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(new Claim[]
-            {
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim("EscolaId", escolaId),
-            }),
-            SigningCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha256Signature),
-            NotBefore = DateTime.Now,
-            Expires = DateTime.Now.AddMinutes(1),
-            Audience = configuration["Jwt:Audience"],
-            Issuer = configuration["Jwt:Issuer"]
-        };
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var newAccessToken = tokenHandler.CreateToken(tokenDescriptor);
 
         var newRefreshToken = TokenGenerator.RefreshToken();
+        var newAccessToken = TokenGenerator.AccessToken(claims, userEmail, configuration);
+        _ = int.TryParse(configuration["JWT:RefreshTokenValidityInMinutes"],
+            out int refreshTokenValidityInMinutes);        
 
         user.RefreshToken = newRefreshToken;
-        user.RefreshTokenExpiryTime = DateTime.Now.AddMinutes(5);
+        user.RefreshTokenExpiryTime = Util.HorarioOficialBrasilia().AddMinutes(refreshTokenValidityInMinutes);
         await userManager.UpdateAsync(user);
 
         return Results.Ok(new
         {
-            AccessToken = tokenHandler.WriteToken(newAccessToken),
+            AccessToken = newAccessToken,
             RefreshToken = newRefreshToken
         });
     }

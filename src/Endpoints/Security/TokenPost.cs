@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using ken_lo.Security;
+using ken_lo.Shared;
 
 namespace w_escolas.Endpoints.Usuarios;
 
@@ -44,7 +45,7 @@ public class TokenPost
             out int refreshTokenValidityInMinutes);
 
         user.RefreshToken = refreshToken;
-        user.RefreshTokenExpiryTime = DateTime.Now.AddMinutes(refreshTokenValidityInMinutes);
+        user.RefreshTokenExpiryTime = Util.HorarioOficialBrasilia().AddMinutes(refreshTokenValidityInMinutes);
 
         await userManager.UpdateAsync(user);
 
