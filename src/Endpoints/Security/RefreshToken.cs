@@ -44,7 +44,7 @@ public static class RefreshToken
         {
             return Results.BadRequest("03-Invalid access token/refresh token");
         }
-        if (user.RefreshTokenExpiryTime <= DateTime.Now)
+        if (user.RefreshTokenExpiryTime <= Util.HorarioOficialBrasilia())
         {
             return Results.BadRequest("04-Invalid access token/refresh token");
         }
