@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using ken_lo.Shared;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ken_lo.Security;
@@ -16,6 +17,10 @@ public static class TokenGenerator
         var escolaId = claims.FirstOrDefault((claim) => claim.Type == "EscolaId")!.Value;
 
         var key = Encoding.ASCII.GetBytes(configuration["Jwt:SecretKey"]!);
+
+        _ = int.TryParse(configuration["JWT:AccessTokenValidityInMinutes"],
+            out int accessTokenValidityInMinutes);
+
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new Claim[]
@@ -26,8 +31,8 @@ public static class TokenGenerator
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha256Signature),
-            NotBefore = DateTime.Now,
-            Expires = DateTime.Now.AddMinutes(1),
+            NotBefore = Util.HorarioOficialBrasilia(),
+            Expires = Util.HorarioOficialBrasilia().AddMinutes(accessTokenValidityInMinutes),
             Audience = configuration["Jwt:Audience"],
             Issuer = configuration["Jwt:Issuer"]
         };
