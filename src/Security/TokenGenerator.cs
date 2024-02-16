@@ -2,7 +2,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using ken_lo.Shared;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ken_lo.Security;
@@ -31,8 +30,8 @@ public static class TokenGenerator
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha256Signature),
-            NotBefore = Util.HorarioOficialBrasilia(),
-            Expires = Util.HorarioOficialBrasilia().AddMinutes(accessTokenValidityInMinutes),
+            NotBefore = DateTime.Now,
+            Expires = DateTime.Now.AddMinutes(accessTokenValidityInMinutes),
             Audience = configuration["Jwt:Audience"],
             Issuer = configuration["Jwt:Issuer"]
         };
