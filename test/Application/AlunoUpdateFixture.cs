@@ -36,7 +36,7 @@ public class AlunoUpdateFixture : BaseFixture
         );
     }
 
-    public AlunoUpdateInput GetInput(Guid? id)
+    public AlunoUpdateInput GetInput(Guid? id = null)
     {
         return new AlunoUpdateInput(
             id ?? Guid.NewGuid(),
@@ -54,5 +54,13 @@ public class AlunoUpdateFixture : BaseFixture
             Faker.Random.Words(2)
         );
     }
+
+    public AlunoUpdateInput GetInputApenasComNome(Guid? id)
+    {
+        return new AlunoUpdateInput(
+            id ?? Guid.NewGuid(),
+            Faker.Company.CompanyName()
+        );
+    }    
 
 }

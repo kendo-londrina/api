@@ -39,30 +39,30 @@ public class Aluno : Pessoa
 
     public void Alterar(
         string nome,
-        string? codigo,
-        DateTime? dataNascimento,
-        string? nacionalidade,
-        string? ufNascimento,
-        string? cidadeNascimento,
-        string? sexo,
-        string? rg,
-        string? cpf,
-        string? email,
-        string? telCelular,
-        string? religiao)
+        string? codigo = null,
+        DateTime? dataNascimento = null,
+        string? nacionalidade = null,
+        string? ufNascimento = null,
+        string? cidadeNascimento = null,
+        string? sexo = null,
+        string? rg = null,
+        string? cpf = null,
+        string? email = null,
+        string? telCelular = null,
+        string? religiao = null)
     {
         Nome = nome;
-        Codigo = codigo;
-        DataNascimento = dataNascimento;
-        Nacionalidade = nacionalidade;
-        UfNascimento = ufNascimento;
-        CidadeNascimento = cidadeNascimento;
-        Sexo = sexo;
-        Rg = rg;
-        Cpf = cpf;
-        Email = email;
-        TelCelular = telCelular;
-        Religiao = religiao;
+        Codigo = codigo ?? Codigo;
+        DataNascimento = dataNascimento ?? DataNascimento;
+        Nacionalidade = nacionalidade ?? Nacionalidade;
+        UfNascimento = ufNascimento ?? UfNascimento;
+        CidadeNascimento = cidadeNascimento ?? CidadeNascimento;
+        Sexo = sexo ?? Sexo;
+        Rg = rg ?? Rg;
+        Cpf = cpf ?? Cpf;
+        Email = email ?? Email;
+        TelCelular = telCelular ?? TelCelular;
+        Religiao = religiao ?? Religiao;
         Validate();
     }
 

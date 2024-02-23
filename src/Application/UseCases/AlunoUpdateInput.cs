@@ -17,17 +17,17 @@ public class AlunoUpdateInput
     public AlunoUpdateInput(
         Guid id,
         string nome,
-        string? codigo,
-        DateTime? dataNascimento,
-        string? nacionalidade,
-        string? ufNascimento,
-        string? cidadeNascimento,
-        string? sexo,
-        string? rg,
-        string? cpf,
-        string? email,
-        string? telCelular,
-        string? religiao
+        string? codigo = null,
+        DateTime? dataNascimento = null,
+        string? nacionalidade = null,
+        string? ufNascimento = null,
+        string? cidadeNascimento = null,
+        string? sexo = null,
+        string? rg = null,
+        string? cpf = null,
+        string? email = null,
+        string? telCelular = null,
+        string? religiao  = null
     ) {
         Id = id;
         Nome = nome;
