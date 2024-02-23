@@ -14,17 +14,20 @@ public class AlunoUpdateTest
         _alunoUpdateFixture = alunoUpdateFixture;
     }
 
-    [Fact()]
-    public async Task AlterarAluno() {
+    [Theory()]
+    [MemberData(
+        nameof(AlunoUpdateTestGenerator.GetAlunosToUpdate),
+        parameters: 10,
+        MemberType = typeof(AlunoUpdateTestGenerator)
+    )]
+    public async Task AlterarAluno(Aluno example, AlunoUpdateInput input) {
         // Arrange
         var repositoryMock = _alunoUpdateFixture.getRepositoryMock();
         var unitOfWorkMock = _alunoUpdateFixture.getUnitOfWorkMock();
-        var example = _alunoUpdateFixture.GetExample();
         repositoryMock.Setup(x => x.Get(
             example.Id,
             It.IsAny<CancellationToken>()
         )).ReturnsAsync(example);
-        var input = _alunoUpdateFixture.GetInput(example.Id);
 
         var useCase = new AlunoUpdate(
             repositoryMock.Object,
