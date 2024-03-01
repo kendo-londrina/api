@@ -1,7 +1,7 @@
 using Moq;
 using FluentAssertions;
 using ken_lo.Domain;
-using ken_lo.Application.UseCases;
+using ken_lo.Application.UseCases.Aluno;
 using ken_lo.Domain.Validation;
 
 namespace ken_lo.Application;
