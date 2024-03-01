@@ -1,6 +1,6 @@
 using ken_lo.Domain.Repository;
 
-namespace ken_lo.Application.UseCases;
+namespace ken_lo.Application.UseCases.Aluno;
 public class AlunoGet
 {
     private readonly IAlunoRepository _alunoRepository;

@@ -1,4 +1,4 @@
-namespace ken_lo.Application.UseCases;
+namespace ken_lo.Application.UseCases.Aluno;
 public class AlunoGetInput
 {
     public Guid Id { get; set; }

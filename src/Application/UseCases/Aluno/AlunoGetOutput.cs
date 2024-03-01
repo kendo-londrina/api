@@ -1,6 +1,6 @@
 using domain = ken_lo.Domain;
 
-namespace ken_lo.Application.UseCases;
+namespace ken_lo.Application.UseCases.Aluno;
 public class AlunoGetOutput
 {
     public Guid Id { get; set; }
