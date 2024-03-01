@@ -1,4 +1,4 @@
-using ken_lo.Domain;
+using domain = ken_lo.Domain;
 using ken_lo.Domain.Repository;
 
 namespace ken_lo.Application.UseCases;
@@ -18,7 +18,7 @@ public class AlunoInsert
         AlunoInsertInput input,
         CancellationToken cancellationToken)
     {
-        var aluno = new Aluno(
+        var aluno = new domain.Aluno(
             input.EscolaId,
             input.Nome,
             input.Codigo,

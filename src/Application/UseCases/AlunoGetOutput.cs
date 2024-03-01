@@ -1,4 +1,4 @@
-using ken_lo.Domain;
+using domain = ken_lo.Domain;
 
 namespace ken_lo.Application.UseCases;
 public class AlunoGetOutput
@@ -50,7 +50,7 @@ public class AlunoGetOutput
         Religiao = religiao;
     }
 
-    public static AlunoGetOutput FromAluno(Aluno aluno)
+    public static AlunoGetOutput FromAluno(domain.Aluno aluno)
     {
         return new AlunoGetOutput(
             aluno.Id,
