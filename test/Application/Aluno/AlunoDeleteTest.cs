@@ -1,8 +1,8 @@
 using Moq;
-using ken_lo.Domain;
+using domain = ken_lo.Domain;
 using ken_lo.Application.UseCases.Aluno;
 
-namespace ken_lo.Application;
+namespace ken_lo.Application.Aluno;
 
 [Collection(nameof(AlunoDeleteFixture))]
 public class AlunoDeleteTest
@@ -30,7 +30,7 @@ public class AlunoDeleteTest
         // Assertion
         repositoryMock.Verify(
             repo => repo.Delete(
-                It.IsAny<Aluno>(),
+                It.IsAny<domain.Aluno>(),
                 It.IsAny<CancellationToken>()
             ),
             Times.Once

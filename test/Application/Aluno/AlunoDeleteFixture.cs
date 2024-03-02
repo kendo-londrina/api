@@ -3,7 +3,7 @@ using ken_lo.Common;
 using ken_lo.Domain.Repository;
 using Moq;
 
-namespace ken_lo.Application;
+namespace ken_lo.Application.Aluno;
 
 [CollectionDefinition(nameof(AlunoDeleteFixture))]
 public class AlunoDeleteFixtureCollection : ICollectionFixture<AlunoDeleteFixture>

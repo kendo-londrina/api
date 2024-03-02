@@ -1,6 +1,6 @@
 using Moq;
 using FluentAssertions;
-using ken_lo.Domain;
+using domain = ken_lo.Domain;
 using ken_lo.Application.UseCases.Aluno;
 using ken_lo.Domain.Validation;
 
@@ -67,7 +67,7 @@ public class AlunoInsertTest
         // Assertion
         repositoryMock.Verify(
             repo => repo.Insert(
-                It.IsAny<Aluno>(),
+                It.IsAny<domain.Aluno>(),
                 It.IsAny<CancellationToken>()
             ),
             Times.Once

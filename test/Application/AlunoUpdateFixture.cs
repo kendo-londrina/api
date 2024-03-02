@@ -1,7 +1,7 @@
 using Bogus.Extensions.Brazil;
 using ken_lo.Application.UseCases.Aluno;
 using ken_lo.Common;
-using ken_lo.Domain;
+using domain = ken_lo.Domain;
 using ken_lo.Domain.Repository;
 using Moq;
 
@@ -17,9 +17,9 @@ public class AlunoUpdateFixture : BaseFixture
     }
     // a sintaxe abaixo é uma simplificação da acima!!!
     public Mock<IUnitOfWork> getUnitOfWorkMock() => new();
-    public Aluno GetExample()
+    public domain.Aluno GetExample()
     {
-        return new Aluno(
+        return new domain.Aluno(
             Guid.NewGuid(),
             Faker.Person.FullName,
             Faker.Random.AlphaNumeric(5),
