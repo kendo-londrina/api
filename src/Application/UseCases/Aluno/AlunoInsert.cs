@@ -1,25 +1,25 @@
-using ken_lo.Domain;
+using domain = ken_lo.Domain;
 using ken_lo.Domain.Repository;
 
-namespace ken_lo.Application.UseCases;
-public class AlunoUpdate
+namespace ken_lo.Application.UseCases.Aluno;
+public class AlunoInsert
 {
     private readonly IAlunoRepository _alunoRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public AlunoUpdate(
+    public AlunoInsert(
         IAlunoRepository alunoRepository,
         IUnitOfWork unitOfWork)
     {
         _alunoRepository = alunoRepository;
         _unitOfWork = unitOfWork;
     }
-    public async Task<AlunoUpdateOutput> Handle(
-        AlunoUpdateInput input,
+    public async Task<AlunoInsertOutput> Handle(
+        AlunoInsertInput input,
         CancellationToken cancellationToken)
     {
-        var aluno = await _alunoRepository.Get(input.Id, cancellationToken);        
-        aluno.Alterar(
+        var aluno = new domain.Aluno(
+            input.EscolaId,
             input.Nome,
             input.Codigo,
             input.DataNascimento,
@@ -33,9 +33,9 @@ public class AlunoUpdate
             input.TelCelular,
             input.Religiao
         );
-        await _alunoRepository.Update(aluno, cancellationToken);
+        await _alunoRepository.Insert(aluno, cancellationToken);
         await _unitOfWork.Commit(cancellationToken);
-        return new AlunoUpdateOutput(
+        return new AlunoInsertOutput(
             aluno.Id,
             aluno.EscolaId,
             aluno.Nome,

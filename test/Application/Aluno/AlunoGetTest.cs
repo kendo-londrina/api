@@ -1,9 +1,9 @@
 using Moq;
 using FluentAssertions;
-using ken_lo.Application.UseCases;
+using ken_lo.Application.UseCases.Aluno;
 using ken_lo.Application.Exceptions;
 
-namespace ken_lo.Application;
+namespace ken_lo.Application.Aluno;
 
 [Collection(nameof(AlunoGetFixture))]
 public class AlunoGetTest

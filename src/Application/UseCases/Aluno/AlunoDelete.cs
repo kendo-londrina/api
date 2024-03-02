@@ -1,7 +1,6 @@
-using ken_lo.Domain;
 using ken_lo.Domain.Repository;
 
-namespace ken_lo.Application.UseCases;
+namespace ken_lo.Application.UseCases.Aluno;
 public class AlunoDelete
 {
     private readonly IAlunoRepository _alunoRepository;

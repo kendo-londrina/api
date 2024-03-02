@@ -1,7 +1,7 @@
 using FluentAssertions;
-using ken_lo.Application.UseCases;
+using ken_lo.Application.UseCases.Aluno;
 
-namespace ken_lo.Application;
+namespace ken_lo.Application.Aluno;
 
 [Collection(nameof(AlunoGetFixture))]
 public class AlunoGetInputValidatorTest

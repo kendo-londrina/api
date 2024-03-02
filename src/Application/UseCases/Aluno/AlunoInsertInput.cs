@@ -1,7 +1,6 @@
-namespace ken_lo.Application.UseCases;
-public class AlunoUpdateOutput
+namespace ken_lo.Application.UseCases.Aluno;
+public class AlunoInsertInput
 {
-    public Guid Id { get; set; }
     public Guid EscolaId { get; set; }
     public string? Codigo { get; set; }
     public string Nome { get; set; }
@@ -15,9 +14,7 @@ public class AlunoUpdateOutput
     public string? Email { get; set; }
     public string? TelCelular { get; set; }
     public string? Religiao { get; set; }
-
-    public AlunoUpdateOutput(
-        Guid id,
+    public AlunoInsertInput(
         Guid escolaId,
         string nome,
         string? codigo,
@@ -30,9 +27,8 @@ public class AlunoUpdateOutput
         string? cpf,
         string? email,
         string? telCelular,
-        string? religiao)
-    {
-        Id = id;
+        string? religiao
+    ) {
         EscolaId = escolaId;
         Nome = nome;
         Codigo = codigo;

@@ -1,10 +1,10 @@
 using Bogus.Extensions.Brazil;
 using ken_lo.Common;
-using ken_lo.Domain;
+using domain = ken_lo.Domain;
 using ken_lo.Domain.Repository;
 using Moq;
 
-namespace ken_lo.Application;
+namespace ken_lo.Application.Aluno;
 
 [CollectionDefinition(nameof(AlunoGetFixture))]
 public class AlunoGetFixtureCollection : ICollectionFixture<AlunoGetFixture>
@@ -14,9 +14,9 @@ public class AlunoGetFixture : BaseFixture
     public Mock<IAlunoRepository> getRepositoryMock() {
         return new Mock<IAlunoRepository>();
     }
-    public Aluno GetValid()
+    public domain.Aluno GetValid()
     {
-        return new Aluno(
+        return new domain.Aluno(
             Guid.NewGuid(),
             Faker.Person.FullName,
             Faker.Random.AlphaNumeric(5),

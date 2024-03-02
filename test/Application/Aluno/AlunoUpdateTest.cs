@@ -1,9 +1,9 @@
 using Moq;
-using ken_lo.Domain;
-using ken_lo.Application.UseCases;
+using domain = ken_lo.Domain;
+using ken_lo.Application.UseCases.Aluno;
 using FluentAssertions;
 
-namespace ken_lo.Application;
+namespace ken_lo.Application.Aluno;
 
 [Collection(nameof(AlunoUpdateFixture))]
 public class AlunoUpdateTest
@@ -20,7 +20,7 @@ public class AlunoUpdateTest
         parameters: 10,
         MemberType = typeof(AlunoUpdateTestGenerator)
     )]
-    public async Task AlterarAluno(Aluno example, AlunoUpdateInput input) {
+    public async Task AlterarAluno(domain.Aluno example, AlunoUpdateInput input) {
         // Arrange
         var repositoryMock = _alunoUpdateFixture.getRepositoryMock();
         var unitOfWorkMock = _alunoUpdateFixture.getUnitOfWorkMock();
@@ -40,7 +40,7 @@ public class AlunoUpdateTest
         // Assertion
         repositoryMock.Verify(
             repo => repo.Update(
-                It.IsAny<Aluno>(),
+                It.IsAny<domain.Aluno>(),
                 It.IsAny<CancellationToken>()
             ),
             Times.Once
@@ -89,7 +89,7 @@ public class AlunoUpdateTest
         // Assertion
         repositoryMock.Verify(
             repo => repo.Update(
-                It.IsAny<Aluno>(),
+                It.IsAny<domain.Aluno>(),
                 It.IsAny<CancellationToken>()
             ),
             Times.Once

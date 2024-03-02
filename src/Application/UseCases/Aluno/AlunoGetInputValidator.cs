@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace ken_lo.Application.UseCases;
+namespace ken_lo.Application.UseCases.Aluno;
 public class AlunoGetInputValidator : AbstractValidator<AlunoGetInput>
 {
     public AlunoGetInputValidator()
