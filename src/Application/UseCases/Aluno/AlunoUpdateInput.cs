@@ -1,8 +1,7 @@
-namespace ken_lo.Application.UseCases;
-public class AlunoUpdateOutput
+namespace ken_lo.Application.UseCases.Aluno;
+public class AlunoUpdateInput
 {
     public Guid Id { get; set; }
-    public Guid EscolaId { get; set; }
     public string? Codigo { get; set; }
     public string Nome { get; set; }
     public DateTime? DataNascimento { get; set; }
@@ -15,25 +14,22 @@ public class AlunoUpdateOutput
     public string? Email { get; set; }
     public string? TelCelular { get; set; }
     public string? Religiao { get; set; }
-
-    public AlunoUpdateOutput(
+    public AlunoUpdateInput(
         Guid id,
-        Guid escolaId,
         string nome,
-        string? codigo,
-        DateTime? dataNascimento,
-        string? nacionalidade,
-        string? ufNascimento,
-        string? cidadeNascimento,
-        string? sexo,
-        string? rg,
-        string? cpf,
-        string? email,
-        string? telCelular,
-        string? religiao)
-    {
+        string? codigo = null,
+        DateTime? dataNascimento = null,
+        string? nacionalidade = null,
+        string? ufNascimento = null,
+        string? cidadeNascimento = null,
+        string? sexo = null,
+        string? rg = null,
+        string? cpf = null,
+        string? email = null,
+        string? telCelular = null,
+        string? religiao  = null
+    ) {
         Id = id;
-        EscolaId = escolaId;
         Nome = nome;
         Codigo = codigo;
         DataNascimento = dataNascimento;
