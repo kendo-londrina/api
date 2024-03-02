@@ -3,7 +3,7 @@ using domain = ken_lo.Domain;
 using ken_lo.Application.UseCases.Aluno;
 using FluentAssertions;
 
-namespace ken_lo.Application;
+namespace ken_lo.Application.Aluno;
 
 [Collection(nameof(AlunoUpdateFixture))]
 public class AlunoUpdateTest

@@ -5,7 +5,7 @@ using domain = ken_lo.Domain;
 using ken_lo.Domain.Repository;
 using Moq;
 
-namespace ken_lo.Application;
+namespace ken_lo.Application.Aluno;
 
 [CollectionDefinition(nameof(AlunoUpdateFixture))]
 public class AlunoUpdateFixtureCollection : ICollectionFixture<AlunoUpdateFixture>

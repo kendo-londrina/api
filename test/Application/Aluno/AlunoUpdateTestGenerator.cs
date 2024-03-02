@@ -1,6 +1,4 @@
-using ken_lo.Application.UseCases;
-
-namespace ken_lo.Application;
+namespace ken_lo.Application.Aluno;
 public class AlunoUpdateTestGenerator
 {
     protected AlunoUpdateTestGenerator() { }
