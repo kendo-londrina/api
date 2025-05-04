@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using w_escolas.Domain.Alunos;
+using ken_lo.Domain;
 using w_escolas.Endpoints.Alunos.dtos;
 using w_escolas.Shared;
 
-namespace w_escolas.Endpoints.Alunos;
+namespace ken_lo.Endpoints.Alunos;
 
-public class AlunoGet
+public static class AlunoGet
 {
     public static string Template => "/alunos";
     public static string[] Methods => new string[] { HttpMethod.Get.ToString() };

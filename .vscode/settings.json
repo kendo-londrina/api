@@ -1,14 +1,14 @@
 {
-    "dotnet-test-explorer.autoExpandTree": true,
-    "dotnet-test-explorer.autoWatch": true,
+    "dotnet-test-explorer.autoExpandTree": false,
+    "dotnet-test-explorer.autoWatch": false,
     "dotnet-test-explorer.treeMode": "full",    
     "dotnet-test-explorer.testArguments": "/p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./TestResults/lcov.info",
     "dotnet-test-explorer.testProjectPath": "**/*-test.@(csproj|vbproj|fsproj)",
-    "coverage-gutters.coverageFileNames": [
-        "lcov.info",
-        "cov.xml",
-        "coverage.xml",
-        "jacoco.xml",
-        "coverage.cobertura.xml"
-    ]
+    // "coverage-gutters.coverageFileNames": [
+    //     "lcov.info",
+    //     "cov.xml",
+    //     "coverage.xml",
+    //     "jacoco.xml",
+    //     "coverage.cobertura.xml"
+    // ]
 }

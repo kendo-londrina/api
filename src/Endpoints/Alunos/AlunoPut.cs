@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using w_escolas.Domain.Alunos;
+using ken_lo.Domain;
+using ken_lo.Domain.Validation;
+using w_escolas.Endpoints;
 using w_escolas.Endpoints.Alunos.dtos;
-using w_escolas.Infra.Data;
 using w_escolas.Shared;
 
-namespace w_escolas.Endpoints.Alunos;
+namespace ken_lo.Endpoints.Alunos;
 
-public class AlunoPut
+public static class AlunoPut
 {
     public static string Template => "/alunos/{id:guid}";
     public static string[] Methods => new string[] { HttpMethod.Put.ToString() };
@@ -26,24 +27,32 @@ public class AlunoPut
                 "Não é proprietário da escola".ConvertToProblemDetails()
             );
 
-        aluno.Alterar(
-            alunoRequest.Nome!,
-            alunoRequest.Codigo!.Trim(),
-            alunoRequest.DataNascimento,
-            alunoRequest.Nacionalidade!.Trim(),
-            alunoRequest.UfNascimento!.Trim(),
-            alunoRequest.CidadeNascimento!.Trim(),
-            alunoRequest.Sexo!.Trim(),
-            alunoRequest.Rg!.Trim(),
-            alunoRequest.Cpf!.Trim(),
-            alunoRequest.Email!.Trim(),
-            alunoRequest.TelCelular!.Trim(),
-            alunoRequest.Religiao!.Trim()
-        );
-        var validator = new AlunoValidator();
-        var validation = validator.Validate(aluno);
-        if (!validation.IsValid)
-            return Results.ValidationProblem(validation.Errors.ConvertToProblemDetails());
+        try
+        {
+            aluno.Alterar(
+                alunoRequest.Nome!,
+                alunoRequest.Codigo!.Trim(),
+                alunoRequest.DataNascimento,
+                alunoRequest.Nacionalidade!.Trim(),
+                alunoRequest.UfNascimento!.Trim(),
+                alunoRequest.CidadeNascimento!.Trim(),
+                alunoRequest.Sexo!.Trim(),
+                alunoRequest.Rg!.Trim(),
+                alunoRequest.Cpf!.Trim(),
+                alunoRequest.Email!.Trim(),
+                alunoRequest.TelCelular!.Trim(),
+                alunoRequest.Religiao!.Trim()
+            );
+        }
+        catch (EntityValidationException ex)
+        {
+            errorMessages.Add(ex.Message);
+            return Results.ValidationProblem(errorMessages.ConvertToProblemDetails());
+        }
+        // var validator = new AlunoValidator();
+        // var validation = validator.Validate(aluno);
+        // if (!validation.IsValid)
+        //     return Results.ValidationProblem(validation.Errors.ConvertToProblemDetails());
 
         if (NaoPodeAlterar(context, aluno))
             return Results.ValidationProblem(errorMessages.ConvertToProblemDetails());
@@ -59,10 +68,11 @@ public class AlunoPut
     {
         if (aluno.Codigo is not null && aluno.Codigo != "")
         {
-            if (context.Alunos!.Where(t =>
+            var temAlunoComMesmoCodigo = context.Alunos!.Where(t =>
                 t.EscolaId == aluno.EscolaId &&
                 t.Codigo == aluno.Codigo &&
-                t.Id != aluno.Id).Any())
+                t.Id != aluno.Id).Any();
+            if (temAlunoComMesmoCodigo)
             {
                 errorMessages.Add($"Já existe Aluno com código {aluno.Codigo}.");
             }
@@ -73,7 +83,7 @@ public class AlunoPut
     {
         errorMessages.Clear();
         VerificarComMesmoCodigo(context, aluno);
-        // VerificarComMesmoNome(context, aluno);
+        // VerificarComMesmoNome(context, aluno)
         return errorMessages.Count > 0;
     }
 

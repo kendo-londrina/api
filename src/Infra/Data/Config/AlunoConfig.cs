@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using w_escolas.Domain.Alunos;
+using ken_lo.Domain;
 
 namespace w_escolas.Infra.Data.Config;
 

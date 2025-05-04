@@ -21,6 +21,90 @@ namespace w_escolas.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("ken_lo.Domain.Aluno", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CidadeNascimento")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Codigo")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("Cpf")
+                        .HasMaxLength(15)
+                        .HasColumnType("varchar(15)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataNascimento")
+                        .IsRequired()
+                        .HasColumnType("date");
+
+                    b.Property<string>("EditedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<DateTime?>("EditedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<Guid?>("EnderecoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EscolaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nacionalidade")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Religiao")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Rg")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Sexo")
+                        .HasMaxLength(1)
+                        .HasColumnType("char(1)");
+
+                    b.Property<string>("TelCelular")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("UfNascimento")
+                        .HasMaxLength(2)
+                        .HasColumnType("char(2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnderecoId");
+
+                    b.HasIndex("EscolaId");
+
+                    b.ToTable("Alunos", (string)null);
+                });
+
             modelBuilder.Entity("ken_lo.Domain.Familias.Familia", b =>
                 {
                     b.Property<Guid>("Id")
@@ -112,76 +196,6 @@ namespace w_escolas.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -278,88 +292,81 @@ namespace w_escolas.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("w_escolas.Domain.Alunos.Aluno", b =>
+            modelBuilder.Entity("Security.ApplicationUser", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CidadeNascimento")
+                    b.Property<string>("Id")
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<string>("Codigo")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Cpf")
-                        .HasMaxLength(15)
-                        .HasColumnType("varchar(15)");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
-
-                    b.Property<DateTime?>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DataNascimento")
-                        .IsRequired()
-                        .HasColumnType("date");
-
-                    b.Property<string>("EditedBy")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<DateTime?>("EditedOn")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
 
-                    b.Property<Guid?>("EnderecoId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
 
-                    b.Property<Guid>("EscolaId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("Nacionalidade")
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("PasswordHash")
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<string>("Nome")
-                        .IsRequired()
+                    b.Property<string>("PhoneNumber")
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<string>("Religiao")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("Rg")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                    b.Property<string>("RefreshToken")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
-                    b.Property<string>("Sexo")
-                        .HasMaxLength(1)
-                        .HasColumnType("char(1)");
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("TelCelular")
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
+                    b.Property<string>("SecurityStamp")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
-                    b.Property<string>("UfNascimento")
-                        .HasMaxLength(2)
-                        .HasColumnType("char(2)");
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EnderecoId");
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
 
-                    b.HasIndex("EscolaId");
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("Alunos", (string)null);
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("w_escolas.Domain.Cursos.Curso", b =>
@@ -769,6 +776,23 @@ namespace w_escolas.Migrations
                     b.ToTable("Turmas", (string)null);
                 });
 
+            modelBuilder.Entity("ken_lo.Domain.Aluno", b =>
+                {
+                    b.HasOne("w_escolas.Domain.Enderecos.Endereco", "Endereco")
+                        .WithMany()
+                        .HasForeignKey("EnderecoId");
+
+                    b.HasOne("w_escolas.Domain.Escolas.Escola", "Escola")
+                        .WithMany("Alunos")
+                        .HasForeignKey("EscolaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Endereco");
+
+                    b.Navigation("Escola");
+                });
+
             modelBuilder.Entity("ken_lo.Domain.Familias.Familia", b =>
                 {
                     b.HasOne("w_escolas.Domain.Escolas.Escola", "Escola")
@@ -791,7 +815,7 @@ namespace w_escolas.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Security.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -800,7 +824,7 @@ namespace w_escolas.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Security.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -815,7 +839,7 @@ namespace w_escolas.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Security.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -824,28 +848,11 @@ namespace w_escolas.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Security.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("w_escolas.Domain.Alunos.Aluno", b =>
-                {
-                    b.HasOne("w_escolas.Domain.Enderecos.Endereco", "Endereco")
-                        .WithMany()
-                        .HasForeignKey("EnderecoId");
-
-                    b.HasOne("w_escolas.Domain.Escolas.Escola", "Escola")
-                        .WithMany("Alunos")
-                        .HasForeignKey("EscolaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Endereco");
-
-                    b.Navigation("Escola");
                 });
 
             modelBuilder.Entity("w_escolas.Domain.Cursos.Curso", b =>
@@ -873,7 +880,7 @@ namespace w_escolas.Migrations
 
             modelBuilder.Entity("w_escolas.Domain.Matriculas.Matricula", b =>
                 {
-                    b.HasOne("w_escolas.Domain.Alunos.Aluno", "Aluno")
+                    b.HasOne("ken_lo.Domain.Aluno", "Aluno")
                         .WithMany("Matriculas")
                         .HasForeignKey("AlunoId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -947,7 +954,7 @@ namespace w_escolas.Migrations
                     b.Navigation("Escola");
                 });
 
-            modelBuilder.Entity("w_escolas.Domain.Alunos.Aluno", b =>
+            modelBuilder.Entity("ken_lo.Domain.Aluno", b =>
                 {
                     b.Navigation("Matriculas");
                 });

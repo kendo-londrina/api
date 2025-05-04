@@ -1,4 +1,4 @@
-﻿using w_escolas.Domain._abstractClasses;
+﻿using ken_lo.Domain._abstractClasses;
 using w_escolas.Domain.Cursos;
 using w_escolas.Domain.Escolas;
 using w_escolas.Domain.Matriculas;

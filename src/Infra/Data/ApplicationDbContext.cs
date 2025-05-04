@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-using w_escolas.Domain.Alunos;
+using ken_lo.Domain;
+using ken_lo.Security;
 using w_escolas.Domain.Cursos;
 using w_escolas.Domain.Enderecos;
 using w_escolas.Domain.Escolas;
@@ -14,7 +15,7 @@ using w_escolas.Domain.TiposDeCursos;
 using w_escolas.Domain.Turmas;
 using w_escolas.Infra.Data.Config;
 
-public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     public DbSet<Escola>? Escolas { get; set; }
     public DbSet<TipoDeCurso>? TiposDeCursos { get; set; }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.WebUtilities;
+using ken_lo.Security;
 using System.Security.Claims;
 using System.Text;
 
@@ -22,11 +23,11 @@ public class UsuarioPost
     [AllowAnonymous]
     public static async Task<IResult> Action(
         UsuarioDto usuarioRequest,
-        UserManager<IdentityUser> userManager,
+        UserManager<ApplicationUser> userManager,
         IEmailSender emailSender,
         IConfiguration configuration)
     {
-        var user = new IdentityUser { UserName = usuarioRequest.Email, Email = usuarioRequest.Email };
+        var user = new ApplicationUser { UserName = usuarioRequest.Email, Email = usuarioRequest.Email };
         var result = userManager.CreateAsync(user, usuarioRequest.Password).Result;
 
         if (!result.Succeeded)

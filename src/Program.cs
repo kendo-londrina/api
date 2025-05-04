@@ -1,12 +1,13 @@
 using System.Text;
+using ken_lo.Endpoints.Alunos;
 using ken_lo.Endpoints.Familias;
+using ken_lo.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
-using w_escolas.Endpoints.Alunos;
 using w_escolas.Endpoints.Cursos;
 using w_escolas.Endpoints.Escolas;
 using w_escolas.Endpoints.Matriculas;
@@ -35,7 +36,7 @@ builder.Host.UseSerilog(logger);
 builder.Services.AddSqlServer<ApplicationDbContext>(
     builder.Configuration["Database:ConnectionString"]!);
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     //options.Password.RequireNonAlphanumeric = false;
     //options.Password.RequireUppercase = false;
@@ -56,15 +57,16 @@ builder.Services.AddAuthentication(x =>
 {
     options.TokenValidationParameters = new TokenValidationParameters()
     {
+        ClockSkew = TimeSpan.Zero,
         ValidateActor = true,
         ValidateAudience = true,
         ValidateIssuer = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["JwtBearerTokenSettings:Issuer"],
-        ValidAudience = builder.Configuration["JwtBearerTokenSettings:Audience"],
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(builder.Configuration["JwtBearerTokenSettings:SecretKey"]!))
+            Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]!))
     };
 });
 builder.Services.AddAuthorization(options =>
@@ -119,6 +121,7 @@ app.MapMethods(EmailConfirmationPost.Template, EmailConfirmationPost.Methods, Em
 app.MapMethods(TokenPost.Template, TokenPost.Methods, TokenPost.Handle);
 app.MapMethods(ForgottenPasswordPost.Template, ForgottenPasswordPost.Methods, ForgottenPasswordPost.Handle);
 app.MapMethods(PasswordResetPost.Template, PasswordResetPost.Methods, PasswordResetPost.Handle);
+app.MapMethods(RefreshToken.Template, RefreshToken.Methods, RefreshToken.Handle);
 
 app.MapMethods(EscolaPost.Template, EscolaPost.Methods, EscolaPost.Handle);
 app.MapMethods(EscolaGetAll.Template, EscolaGetAll.Methods, EscolaGetAll.Handle);

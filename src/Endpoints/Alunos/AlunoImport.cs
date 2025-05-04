@@ -1,9 +1,9 @@
-﻿using w_escolas.Domain.Alunos;
+﻿using ken_lo.Domain;
 using w_escolas.Shared;
 
-namespace w_escolas.Endpoints.Alunos;
+namespace ken_lo.Endpoints.Alunos;
 
-public class AlunoImport
+public static class AlunoImport
 {
     public static string Template => "/alunos/import";
     public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
